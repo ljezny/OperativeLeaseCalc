@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  OperativeLeaseCalc
+
+  Created by Lukas Jezny on 24/11/2019.
+  Copyright © 2019 Lukas Jezny. All rights reserved.
+*/
+"general.appname" = "Kalkulačka nájezdu OL";
+"actualstate.header" = "Ideální stav";
+"actualstate.footer" = "Ideálně by mělo mít vozidlo k dnešnímu dni najeto uvedený počet kilometrů nebo méně. Tuto hodnotu můžete sledovat i na hlavní obrazovce vašeho telefonu pomocí widgetu.";
+"lease.params.header" = "Parametry operativního leasingu";
+"lease.params.footer" = "Na základě vyplněných parametrů aplikace vypočte denní nájezd a pronásobí jej počtem dnů, které uběhly od data převzetí. Do ročního nájezdu započítejte i tzv. volné kilometry.";
+"start.date" = "Datum převzetí vozidla";
+"year.limit" = "Roční nájezd v km.";
+"notifications.header" = "Notifikace";
+"notifications.footer" = "Aplikace zobrazí notifikaci o kontrole nájezdu před každou jízdou. Je nutné aby tento telefon byl spárován s vozidlem.";
+"notifications.enable" = "Povolit notifikace";
+"notifications.title" = "Zkontrolujte nájezd";
+"notifications.body" = "Ideální stav je %@.";
+
