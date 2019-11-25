@@ -14,14 +14,7 @@ struct ContentView: View {
     
     @State var isAdding: Bool = false
     
-    @State private var realState: Int? {
-        didSet {
-            if let realState = self.realState {
-              //  self.model.addRealState(realState: realState)
-                self.realState = nil
-            }
-        }
-    }
+    @State private var realState: Int?
     
     private var yearLimitFormatted: NumberFormatter {
         let f = NumberFormatter()
@@ -36,7 +29,16 @@ struct ContentView: View {
         NavigationView {
             VStack{
                 Text("Modal")
-                TextField("state", value: $realState, formatter: yearLimitFormatted)
+                TextField("state", value: $realState, formatter: yearLimitFormatted, onEditingChanged: { (b) in
+                    
+                }) {
+                    print("\(self.realState ?? 0)")
+                    
+                }
+                Button("Konec"){
+                    self.isAdding = false
+                }
+                
             }.navigationBarTitle("xxc")
         }
         
@@ -62,6 +64,9 @@ struct ContentView: View {
                                 Text("start.date")
                             }
                             TextField("year.limit", value: $model.yearLimit, formatter: yearLimitFormatted)
+                            Button("Propocitat") {
+                                PersistentStorageManager.shared.saveContext()
+                            }
                         }
                         Section(header: Text("notifications.header").font(.subheadline), footer: Text("notifications.footer").font(.footnote)){
                             Toggle(isOn: $model.notifications) {
