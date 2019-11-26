@@ -9,11 +9,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var model = PersistentStorageManager.shared.loadLeaseParams()
-    private var history = PersistentStorageManager.shared.loadHistory()
-    
+    @ObservedObject var model = AppModel.shared
     @State var isAdding: Bool = false
-    
     @State private var realState: Int?
     
     private var yearLimitFormatted: NumberFormatter {
@@ -27,20 +24,27 @@ struct ContentView: View {
     
     var addingRealStateModalView: some View {
         NavigationView {
-            VStack{
-                Text("Modal")
-                TextField("state", value: $realState, formatter: yearLimitFormatted, onEditingChanged: { (b) in
+            VStack(alignment: .center, spacing: 24) {
+                TextField("realstate.placeholder", value: $realState, formatter: yearLimitFormatted, onEditingChanged: { (b) in
                     
                 }) {
                     print("\(self.realState ?? 0)")
+                    if let state = self.realState {
+                        AppModel.shared.addState(state: state)
+                        self.realState = nil
+                        self.isAdding = false
+                    }
                     
-                }
+                    
+                }.textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(UIKeyboardType.decimalPad)
+                Text("realstate.footer").font(.footnote).lineLimit(20)
                 Button("Konec"){
+                    print("\(self.realState ?? 0)")
                     self.isAdding = false
                 }
-                
-            }.navigationBarTitle("xxc")
-        }
+            }.padding().navigationBarTitle("realstate.add")
+        }.accentColor(Color.red)
         
     }
     
@@ -49,34 +53,34 @@ struct ContentView: View {
                 NavigationView {
                     Form{
                         Section(header: Text("actualstate.header").font(.subheadline), footer: Text("actualstate.footer").font(.footnote)) {
-                            Text("\(model.actualLimitFormatted)").font(.largeTitle)
+                            Text("\(model.leaseParams.actualLimitFormatted)").font(.largeTitle)
                         }
                         Section(header: Text("realstate.header").font(.subheadline), footer: Text("realstate.footer").font(.footnote)) {
-                            Text("\(model.actualLimitFormatted)").font(.largeTitle)
-                            Button("Add") {
+                            Text("\(model.history.first?.state ?? 0) km").font(.largeTitle)
+                            Button("realstate.add") {
                                 self.isAdding = true
                             }.sheet(isPresented: $isAdding, content: {
                                 self.addingRealStateModalView
                             })
                         }
-                        Section(header: Text("lease.params.header").font(.subheadline), footer: Text("lease.params.footer").font(.footnote)){
-                            DatePicker(selection: $model.leaseStart, in: ...Date(), displayedComponents: .date) {
+                        Section(header: Text("lease.params.header").font(.subheadline), footer: Text("lease.params.footer").font(.footnote)) {
+                            DatePicker(selection: $model.leaseParams.leaseStart, in: ...Date(), displayedComponents: .date) {
                                 Text("start.date")
                             }
-                            TextField("year.limit", value: $model.yearLimit, formatter: yearLimitFormatted)
-                            Button("Propocitat") {
-                                PersistentStorageManager.shared.saveContext()
-                            }
+                            TextField("year.limit", value: $model.leaseParams.yearLimit, formatter: yearLimitFormatted).keyboardType(.decimalPad)
                         }
                         Section(header: Text("notifications.header").font(.subheadline), footer: Text("notifications.footer").font(.footnote)){
-                            Toggle(isOn: $model.notifications) {
+                            Toggle(isOn: $model.leaseParams.notifications) {
                                 Text("notifications.enable")
                             }
                         }
-                    }.navigationBarTitle(Text("aa"))
-                }.tabItem({ Text("First") })
+                    }.navigationBarTitle(Text("general.appname"))
+                }.tabItem({
+                    Image("tab_note")
+                    Text("First")
+                })
                 NavigationView {
-                    List(history) { h in
+                    List(AppModel.shared.history) { h in
                         VStack {
                             Text("\(h.state ?? 0) km").font(.body)
                             Text("\(h.date ?? Date())").font(.footnote)
@@ -87,7 +91,9 @@ struct ContentView: View {
                             }.sheet(isPresented: $isAdding, content: {
                                 self.addingRealStateModalView
                             }))
-                }.tabItem({ Text("Second") })
+                }.tabItem({
+                    Image("tab_history")
+                    Text("Second") })
                 NavigationView {
                     Form{
                         List {
@@ -96,10 +102,26 @@ struct ContentView: View {
                             Text("Hello world")
                         }
                     }.navigationBarTitle(Text("Third"))
-                }.tabItem({ Text("Third") })
-            }
+                }.tabItem({
+                    Image("tab_graph")
+                    Text("tab.history")
+                })
+                NavigationView {
+                    Form{
+                        List {
+                            Text("Hello world")
+                            Text("Hello world")
+                            Text("Hello world")
+                        }
+                    }.navigationBarTitle(Text("Third"))
+                }.tabItem({
+                    Image("tab_settings")
+                    Text("tab.settings")
+                })
+        }.accentColor(Color.red)
         //}.navigationViewStyle(StackNavigationViewStyle())
     }
+    
     
 }
 

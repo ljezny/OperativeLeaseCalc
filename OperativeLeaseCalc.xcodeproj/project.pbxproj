@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5666417A238DB9550038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
+		5666417B238DB9580038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
 		5697FE59238C490500D487EE /* PersistentStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697FE58238C490500D487EE /* PersistentStorageManager.swift */; };
 		5697FE5A238C4BE800D487EE /* PersistentStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697FE58238C490500D487EE /* PersistentStorageManager.swift */; };
 		5697FE8E238C4FCF00D487EE /* LeaseParamsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697FE8D238C4FCF00D487EE /* LeaseParamsEx.swift */; };
@@ -75,6 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		56664179238DB9550038B435 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		5697FE56238C486D00D487EE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5697FE58238C490500D487EE /* PersistentStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorageManager.swift; sourceTree = "<group>"; };
 		5697FE74238C4E4700D487EE /* CoreData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreData.h; sourceTree = "<group>"; };
@@ -120,6 +123,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		56664178238DB9400038B435 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				56664179238DB9550038B435 /* AppModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		56849359238B10F600608760 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +174,7 @@
 		56D594B523897C6C00A69388 /* OperativeLeaseCalc */ = {
 			isa = PBXGroup;
 			children = (
+				56664178238DB9400038B435 /* Model */,
 				56849359238B10F600608760 /* Extensions */,
 				56D594EE238AFBCF00A69388 /* Manager */,
 				56D594ED238AFBC600A69388 /* View */,
@@ -331,6 +343,7 @@
 				56B1CB15238C68BA00B121E3 /* HistoryEx.swift in Sources */,
 				5697FE8E238C4FCF00D487EE /* LeaseParamsEx.swift in Sources */,
 				56D594B723897C6C00A69388 /* AppDelegate.swift in Sources */,
+				5666417A238DB9550038B435 /* AppModel.swift in Sources */,
 				56B1CB13238C546B00B121E3 /* Model.xcdatamodeld in Sources */,
 				5697FE59238C490500D487EE /* PersistentStorageManager.swift in Sources */,
 				56D594B923897C6C00A69388 /* SceneDelegate.swift in Sources */,
@@ -342,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5666417B238DB9580038B435 /* AppModel.swift in Sources */,
 				56D594EB238AF9B000A69388 /* NotificationManager.swift in Sources */,
 				5697FE8F238C4FCF00D487EE /* LeaseParamsEx.swift in Sources */,
 				5697FE91238C53A200D487EE /* Model.xcdatamodeld in Sources */,
