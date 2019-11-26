@@ -69,31 +69,29 @@ struct ContentView: View {
                             }
                             TextField("year.limit", value: $model.leaseParams.yearLimit, formatter: yearLimitFormatted).keyboardType(.decimalPad)
                         }
-                        Section(header: Text("notifications.header").font(.subheadline), footer: Text("notifications.footer").font(.footnote)){
-                            Toggle(isOn: $model.leaseParams.notifications) {
-                                Text("notifications.enable")
-                            }
-                        }
+                        
                     }.navigationBarTitle(Text("general.appname"))
                 }.tabItem({
                     Image("tab_note")
-                    Text("First")
+                    Text("tab.overview")
                 })
                 NavigationView {
-                    List(AppModel.shared.history) { h in
-                        VStack {
-                            Text("\(h.state ?? 0) km").font(.body)
-                            Text("\(h.date ?? Date())").font(.footnote)
+                    Form{
+                        List(AppModel.shared.history) { h in
+                            VStack {
+                                Text("\(h.state ?? 0) km").font(.body)
+                                Text("\(h.dateFormatter.string(from: h.date ?? Date()))").font(.footnote)
+                            }
                         }
-                    }.navigationBarTitle(Text("Third")).navigationBarItems(trailing:
-                            Button("Add") {
+                    }.navigationBarTitle(Text("tab.history")).navigationBarItems(trailing:
+                            Button("realstate.add") {
                                 self.isAdding = true
                             }.sheet(isPresented: $isAdding, content: {
                                 self.addingRealStateModalView
                             }))
                 }.tabItem({
                     Image("tab_history")
-                    Text("Second") })
+                    Text("tab.history") })
                 NavigationView {
                     Form{
                         List {
@@ -108,12 +106,12 @@ struct ContentView: View {
                 })
                 NavigationView {
                     Form{
-                        List {
-                            Text("Hello world")
-                            Text("Hello world")
-                            Text("Hello world")
+                        Section(header: Text("notifications.header").font(.subheadline), footer: Text("notifications.footer").font(.footnote)){
+                            Toggle(isOn: $model.leaseParams.notifications) {
+                                Text("notifications.enable")
+                            }
                         }
-                    }.navigationBarTitle(Text("Third"))
+                    }.navigationBarTitle(Text("tab.settings"))
                 }.tabItem({
                     Image("tab_settings")
                     Text("tab.settings")

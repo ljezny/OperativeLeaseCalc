@@ -13,7 +13,7 @@
 "start.date" = "Datum převzetí vozidla";
 "year.limit" = "Roční nájezd v km.";
 "notifications.header" = "Notifikace";
-"notifications.footer" = "Aplikace zobrazí notifikaci o kontrole nájezdu před každou jízdou. Je nutné aby tento telefon byl spárován s vozidlem.";
+"notifications.footer" = "Aplikace zobrazí notifikaci o kontrole nájezdu jednou za čas.";
 "notifications.enable" = "Povolit notifikace";
 "notifications.title" = "Zkontrolujte nájezd";
 "notifications.body" = "Ideální stav je %@.";
@@ -22,5 +22,6 @@
 "realstate.placeholder" = "Aktuální nájezd v km";
 "realstate.add" = "Zadat nájezd";
 
-
+"tab.overview" = "Přehled";
 "tab.settings" = "Nastavení";
+"tab.history" = "Historie";

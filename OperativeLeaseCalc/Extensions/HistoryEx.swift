@@ -12,4 +12,11 @@ extension History: Identifiable {
     public var id:String {
         return self.objectID.uriRepresentation().absoluteString
     }
+    
+    public var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.timeStyle = .none
+        df.dateStyle = .medium
+        return df
+    }
 }
