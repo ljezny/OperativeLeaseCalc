@@ -82,8 +82,6 @@
 		5666417E23905BB70038B435 /* OBD2Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBD2Manager.swift; sourceTree = "<group>"; };
 		5697FE56238C486D00D487EE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5697FE58238C490500D487EE /* PersistentStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorageManager.swift; sourceTree = "<group>"; };
-		5697FE74238C4E4700D487EE /* CoreData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreData.h; sourceTree = "<group>"; };
-		5697FE75238C4E4700D487EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5697FE8B238C4EE700D487EE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		5697FE8D238C4FCF00D487EE /* LeaseParamsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaseParamsEx.swift; sourceTree = "<group>"; };
 		56B1CB14238C68BA00B121E3 /* HistoryEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEx.swift; sourceTree = "<group>"; };
@@ -146,8 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				5697FE55238C486D00D487EE /* Model.xcdatamodeld */,
-				5697FE74238C4E4700D487EE /* CoreData.h */,
-				5697FE75238C4E4700D487EE /* Info.plist */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
