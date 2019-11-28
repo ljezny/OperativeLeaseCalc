@@ -37,5 +37,4 @@ extension LeaseParams {
             startDate = v
         }
     }
-    
 }
