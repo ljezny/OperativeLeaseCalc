@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import SwiftUI
 extension History: Identifiable {
     public var id:String {
         return self.objectID.uriRepresentation().absoluteString
@@ -22,5 +22,9 @@ extension History: Identifiable {
     
     public func idealState(leaseParams: LeaseParams) -> Int? {
         return leaseParams.computeIdealState(date: date!)
+    }
+    
+    public func isOverlimit(leaseParams: LeaseParams) -> Bool {
+        return (idealState(leaseParams: leaseParams) ?? 0) < Int(truncating: state ?? 0)
     }
 }

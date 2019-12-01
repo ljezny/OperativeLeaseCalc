@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var model = AppModel.shared
-    @State var isAdding: Bool = false
     @State private var realState: Int?
     
     private var distanceFormatter: NumberFormatter {
@@ -18,34 +17,7 @@ struct ContentView: View {
         f.allowsFloats = false
         f.minimum = 0
         f.numberStyle = .none
-        
         return f
-    }
-    
-    var addingRealStateModalView: some View {
-        NavigationView {
-            VStack(alignment: .center, spacing: 24) {
-                TextField("realstate.placeholder", value: $realState, formatter: distanceFormatter, onEditingChanged: { (b) in
-                    
-                }) {
-                    print("\(self.realState ?? 0)")
-                    if let state = self.realState {
-                        AppModel.shared.addState(state: state)
-                        self.realState = nil
-                        self.isAdding = false
-                    }
-                    
-                    
-                }.textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(UIKeyboardType.decimalPad)
-                Text("realstate.footer").font(.footnote).lineLimit(20)
-                Button("Konec"){
-                    print("\(self.realState ?? 0)")
-                    self.isAdding = false
-                }
-            }.padding().navigationBarTitle("realstate.add")
-        }.accentColor(Color.red)
-        
     }
     
     var body: some View {
@@ -56,18 +28,20 @@ struct ContentView: View {
                             Text("\(model.leaseParams.idealStateFormatted)").font(.largeTitle)
                         }
                         Section(header: Text("realstate.header").font(.headline), footer: Text("realstate.footer").font(.footnote)) {
-                            Text(AppModel.shared.realStateFormatted).font(.largeTitle)
-                            Button("realstate.add") {
-                                self.isAdding = true
-                            }.sheet(isPresented: $isAdding, content: {
-                                self.addingRealStateModalView
-                            })
+                            Text(AppModel.shared.realStateFormatted).font(.largeTitle).foregroundColor(model.isOverlimit ? Color.red : Color.green)
+                            TextField("realstate.add", value: $realState, formatter: distanceFormatter, onEditingChanged: { (b) in
+                            }) {
+                                if let state = self.realState {
+                                    AppModel.shared.addState(state: state)
+                                    self.realState = nil
+                                }
+                            }.keyboardType(.numbersAndPunctuation)
                         }
                         Section(header: Text("lease.params.header").font(.headline), footer: Text("lease.params.footer").font(.footnote)) {
                             DatePicker(selection: $model.leaseParams.leaseStart, in: ...Date(), displayedComponents: .date) {
                                 Text("start.date")
                             }
-                            TextField("year.limit", value: $model.leaseParams.yearLimit, formatter: distanceFormatter).keyboardType(.decimalPad)
+                            TextField("year.limit", value: $model.leaseParams.yearLimit, formatter: distanceFormatter).keyboardType(.numbersAndPunctuation)
                         }
                         
                     }.navigationBarTitle(Text("general.appname"))
@@ -78,30 +52,20 @@ struct ContentView: View {
                 NavigationView {
                     Form{
                         List(AppModel.shared.history) { h in
-                            VStack {
-                                Text("\(h.dateFormatter.string(from: h.date ?? Date()))").font(.body)
+                            VStack(alignment: .leading) {
+                                Text("\(h.dateFormatter.string(from: h.date ?? Date()))").font(.footnote)
                                 HStack{
-                                    Text("\(h.state ?? 0) km").font(.subheadline)
+                                    Text("\(h.state ?? 0) km").font(.subheadline).foregroundColor(h.isOverlimit(leaseParams: self.model.leaseParams) ? Color.red : Color.green)
+                                    Spacer()
                                     Text("\(h.idealState(leaseParams: self.model.leaseParams) ?? 0) km").font(.subheadline)
                                 }
                             }
                         }
-                    }.navigationBarTitle(Text("tab.history")).navigationBarItems(trailing:
-                            Button("realstate.add") {
-                                self.isAdding = true
-                            }.sheet(isPresented: $isAdding, content: {
-                                self.addingRealStateModalView
-                            }))
+                    }.navigationBarTitle(Text("tab.history"))
                 }.tabItem({
                     Image("tab_history")
                     Text("tab.history") })
-                NavigationView {
-                    Form{
-                        Section(header: Text("notifications.header").font(.headline), footer: Text("notifications.footer").font(.footnote)) {
-                            ChartView(model: model).frame(width: 200, height: 200)
-                        }
-                    }
-                }.navigationBarTitle(Text("Third")).tabItem({
+                ChartView(model: model).frame(width: 200, height: 200).navigationBarTitle(Text("Third")).tabItem({
                     Image("tab_graph")
                     Text("tab.history")
                 })

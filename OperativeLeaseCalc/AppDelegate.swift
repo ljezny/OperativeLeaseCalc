@@ -11,7 +11,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        /*
+        
         var sum = 0;
         for i in 1...256 {
             let calendar = Calendar.current
@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             sum += Int(arc4random() % 30)
             AppModel.shared.addState(date: d, state: sum)
         }
-        PersistentStorageManager.shared.saveContext()*/
+        PersistentStorageManager.shared.saveContext()
         
         return true
     }

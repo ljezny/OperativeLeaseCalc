@@ -8,7 +8,7 @@
 
 import UIKit
 import NotificationCenter
-
+import SwiftUI
 class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var idealCaption: UILabel!
     @IBOutlet weak var limitLabel: UILabel!
@@ -19,12 +19,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidLoad()
         idealCaption.text = NSLocalizedString("today.ideal.caption", comment: "")
         actualCaption.text = NSLocalizedString("today.actual.caption", comment: "")
-        
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         limitLabel.text = AppModel.shared.leaseParams.idealStateFormatted
         actualLabel.text = AppModel.shared.realStateFormatted
+        actualLabel.textColor = AppModel.shared.isOverlimit ? UIColor.red : UIColor.green
         completionHandler(NCUpdateResult.newData)
     }
     

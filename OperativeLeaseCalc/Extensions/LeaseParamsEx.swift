@@ -22,7 +22,7 @@ extension LeaseParams {
         let date2 = calendar.startOfDay(for: date)
         let components = calendar.dateComponents(Set<Calendar.Component>.init(arrayLiteral: .day), from: date1, to: date2)
                
-        let dayLimit = Int(yearLimit ?? 0) / 365
+        let dayLimit = Int(truncating: yearLimit ?? 0) / 365
         return Int(components.day! * dayLimit)
     }
     

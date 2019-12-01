@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class AppModel:NSObject, ObservableObject {
     static let shared = AppModel()
@@ -18,10 +19,9 @@ class AppModel:NSObject, ObservableObject {
         }
     }
     
-    var leaseParams = PersistentStorageManager.shared.loadLeaseParams()
+    @Published var leaseParams = PersistentStorageManager.shared.loadLeaseParams()
     @Published var history = PersistentStorageManager.shared.loadHistory()
-    
-    var lastOBD2State: Int?
+    @Published var lastOBD2State: Int?
     
     var lastOBD2StateFormatted: String {
         return lastOBD2State == nil ? "-- km" : "\(lastOBD2State!) km"
@@ -33,6 +33,10 @@ class AppModel:NSObject, ObservableObject {
     
     var realStateFormatted: String {
         return "\(realState) km"
+    }
+    
+    var isOverlimit: Bool {
+        return self.history.first?.isOverlimit(leaseParams: leaseParams) ?? false
     }
     
     var notifications: Bool {
@@ -79,7 +83,5 @@ class AppModel:NSObject, ObservableObject {
                 NotificationManager.shared.notify(idealState: totalState, actualState: leaseParams.idealState ?? 0 )
             }
         }
-        
-        
     }
 }
