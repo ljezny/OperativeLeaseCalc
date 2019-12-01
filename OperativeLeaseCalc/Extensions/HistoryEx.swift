@@ -19,4 +19,8 @@ extension History: Identifiable {
         df.dateStyle = .medium
         return df
     }
+    
+    public func idealState(leaseParams: LeaseParams) -> Int? {
+        return leaseParams.computeIdealState(date: date!)
+    }
 }

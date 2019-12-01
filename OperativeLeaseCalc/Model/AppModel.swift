@@ -76,7 +76,7 @@ class AppModel:NSObject, ObservableObject {
             let totalState = state + Int(truncating: (leaseParams.obdOffset ?? 0))
             self.addState(state: totalState)
             if notifications {
-                NotificationManager.shared.notify(idealState: totalState, actualState: leaseParams.actualLimit ?? 0 )
+                NotificationManager.shared.notify(idealState: totalState, actualState: leaseParams.idealState ?? 0 )
             }
         }
         

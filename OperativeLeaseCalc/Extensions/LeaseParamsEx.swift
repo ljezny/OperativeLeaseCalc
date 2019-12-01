@@ -9,7 +9,8 @@
 import Foundation
 
 extension LeaseParams {
-    var actualLimit: Int? {
+    
+    func computeIdealState(date: Date) -> Int? {
         let calendar = Calendar.current
         
         guard let startDate = startDate else {
@@ -18,15 +19,19 @@ extension LeaseParams {
         
         // Replace the hour (time) of both dates with 00:00
         let date1 = calendar.startOfDay(for: startDate)
-        let date2 = calendar.startOfDay(for: Date())
+        let date2 = calendar.startOfDay(for: date)
         let components = calendar.dateComponents(Set<Calendar.Component>.init(arrayLiteral: .day), from: date1, to: date2)
                
         let dayLimit = Int(yearLimit ?? 0) / 365
         return Int(components.day! * dayLimit)
     }
     
-    var actualLimitFormatted: String {
-        return "\(actualLimit ?? 0) km"
+    var idealState: Int? {
+        computeIdealState(date: Date())
+    }
+    
+    var idealStateFormatted: String {
+        return "\(idealState ?? 0) km"
     }
     
     var leaseStart:Date {

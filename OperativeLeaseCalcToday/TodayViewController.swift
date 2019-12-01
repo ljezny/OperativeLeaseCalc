@@ -23,7 +23,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        limitLabel.text = PersistentStorageManager.shared.loadLeaseParams().actualLimitFormatted
+        limitLabel.text = AppModel.shared.leaseParams.idealStateFormatted
         actualLabel.text = AppModel.shared.realStateFormatted
         completionHandler(NCUpdateResult.newData)
     }

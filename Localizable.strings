@@ -30,7 +30,7 @@
 "today.actual.caption" = "Skutečný nájezd";
 
 "obd.purchase.header" = "Koupit OBD2";
-"obd.purchase.footer" = "Aplikace umožňuje automatické čtení stavu nájezdu při otočení klíčku v zapalování. Podporovaná jsou pouze zařízení, která komunikují přes Bluetooth 4.0 (nikoliv pouze Bluetooth). Doporučuji zakoupit uvedené zařízení, které bylo v aplikaci plně otestováno.";
+"obd.purchase.footer" = "Aplikace umožňuje automatické čtení stavu nájezdu při otočení klíčku v zapalování. Podporovaná jsou pouze zařízení, která komunikují přes Bluetooth 4.0 (nikoliv pouze Bluetooth). Doporučuji zakoupit uvedené zařízení, které bylo v aplikaci otestováno.";
 "obd.purchase.action" = "Do obchodu s OBD II BT 4.0";
 
 "obd.enable.header" = "Povolit OBD2";

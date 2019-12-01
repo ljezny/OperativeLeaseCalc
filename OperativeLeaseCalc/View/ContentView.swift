@@ -53,7 +53,7 @@ struct ContentView: View {
                 NavigationView {
                     Form{
                         Section(header: Text("actualstate.header").font(.headline), footer: Text("actualstate.footer").font(.footnote)) {
-                            Text("\(model.leaseParams.actualLimitFormatted)").font(.largeTitle)
+                            Text("\(model.leaseParams.idealStateFormatted)").font(.largeTitle)
                         }
                         Section(header: Text("realstate.header").font(.headline), footer: Text("realstate.footer").font(.footnote)) {
                             Text(AppModel.shared.realStateFormatted).font(.largeTitle)
@@ -79,8 +79,11 @@ struct ContentView: View {
                     Form{
                         List(AppModel.shared.history) { h in
                             VStack {
-                                Text("\(h.state ?? 0) km").font(.body)
-                                Text("\(h.dateFormatter.string(from: h.date ?? Date()))").font(.footnote)
+                                Text("\(h.dateFormatter.string(from: h.date ?? Date()))").font(.body)
+                                HStack{
+                                    Text("\(h.state ?? 0) km").font(.subheadline)
+                                    Text("\(h.idealState(leaseParams: self.model.leaseParams) ?? 0) km").font(.subheadline)
+                                }
                             }
                         }
                     }.navigationBarTitle(Text("tab.history")).navigationBarItems(trailing:
