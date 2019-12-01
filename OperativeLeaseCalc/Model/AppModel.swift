@@ -23,6 +23,10 @@ class AppModel:NSObject, ObservableObject {
     
     var lastOBD2State: Int?
     
+    var lastOBD2StateFormatted: String {
+        return lastOBD2State == nil ? "-- km" : "\(lastOBD2State!) km"
+    }
+    
     var realState: Int {
         return (self.history.first?.state as? Int) ?? 0
     }
@@ -68,6 +72,14 @@ class AppModel:NSObject, ObservableObject {
     
     func addStateFromOBD2(state: Int) {
         lastOBD2State = state
-        self.addState(state: state)
+        if obdEnabled {
+            let totalState = state + Int(truncating: (leaseParams.obdOffset ?? 0))
+            self.addState(state: totalState)
+            if notifications {
+                NotificationManager.shared.notify(idealState: totalState, actualState: leaseParams.actualLimit ?? 0 )
+            }
+        }
+        
+        
     }
 }

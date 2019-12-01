@@ -17,10 +17,10 @@ class NotificationManager {
         }
     }
     
-    func notify() {
+    func notify(idealState: Int, actualState: Int) {
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("notification.title", comment: "")
-        content.body = String.init(format: NSLocalizedString("notification.body", comment: ""), PersistentStorageManager.shared.loadLeaseParams().actualLimitFormatted)
+        content.body = String.init(format: NSLocalizedString("notification.body", comment: ""), actualState,idealState)
         content.sound = UNNotificationSound.default
         
         UNUserNotificationCenter.current().add(UNNotificationRequest.init(identifier: "OperativeLease", content:content, trigger: nil)) { (error) in
