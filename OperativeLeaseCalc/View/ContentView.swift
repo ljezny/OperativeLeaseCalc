@@ -28,7 +28,7 @@ struct ContentView: View {
                             Text("\(model.leaseParams.idealStateFormatted)").font(.largeTitle)
                         }
                         Section(header: Text("realstate.header").font(.headline), footer: Text("realstate.footer").font(.footnote)) {
-                            Text(AppModel.shared.realStateFormatted).font(.largeTitle).foregroundColor(model.isOverlimit ? Color.red : Color.green)
+                            Text(AppModel.shared.realStateFormatted).font(.largeTitle).foregroundColor(model.isOverlimit ? Color.red : nil)
                             TextField("realstate.add", value: $realState, formatter: distanceFormatter, onEditingChanged: { (b) in
                             }) {
                                 if let state = self.realState {
@@ -55,7 +55,7 @@ struct ContentView: View {
                             VStack(alignment: .leading) {
                                 Text("\(h.dateFormatter.string(from: h.date ?? Date()))").font(.footnote)
                                 HStack{
-                                    Text("\(h.state ?? 0) km").font(.subheadline).foregroundColor(h.isOverlimit(leaseParams: self.model.leaseParams) ? Color.red : Color.green)
+                                    Text("\(h.state ?? 0) km").font(.subheadline).foregroundColor(h.isOverlimit(leaseParams: self.model.leaseParams) ? Color.red : nil)
                                     Spacer()
                                     Text("\(h.idealState(leaseParams: self.model.leaseParams) ?? 0) km").font(.subheadline)
                                 }
@@ -65,7 +65,7 @@ struct ContentView: View {
                 }.tabItem({
                     Image("tab_history")
                     Text("tab.history") })
-                ChartView(model: model).frame(width: 200, height: 200).navigationBarTitle(Text("Third")).tabItem({
+                ChartView(model: model).navigationBarTitle(Text("Third")).tabItem({
                     Image("tab_graph")
                     Text("tab.history")
                 })
