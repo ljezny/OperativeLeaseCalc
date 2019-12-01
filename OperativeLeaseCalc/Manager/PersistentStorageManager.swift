@@ -52,9 +52,9 @@ class PersistentStorageManager {
         return (try? persistentContainer.viewContext.fetch(request)) ?? [History]()
     }
     
-    func addHistory(state: Int) -> History {
+    func addHistory(date: Date, state: Int) -> History {
         let h = History(context: persistentContainer.viewContext)
-        h.date = Date()
+        h.date = date
         h.state = state as NSNumber
         return h
     }

@@ -94,13 +94,11 @@ struct ContentView: View {
                     Text("tab.history") })
                 NavigationView {
                     Form{
-                        List {
-                            Text("Hello world")
-                            Text("Hello world")
-                            Text("Hello world")
+                        Section(header: Text("notifications.header").font(.subheadline), footer: Text("notifications.footer").font(.footnote)) {
+                            ChartView(model: model).frame(width: 200, height: 200)
                         }
-                    }.navigationBarTitle(Text("Third"))
-                }.tabItem({
+                    }
+                }.navigationBarTitle(Text("Third")).tabItem({
                     Image("tab_graph")
                     Text("tab.history")
                 })

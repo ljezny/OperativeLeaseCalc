@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		56B1CB13238C546B00B121E3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5697FE55238C486D00D487EE /* Model.xcdatamodeld */; };
 		56B1CB15238C68BA00B121E3 /* HistoryEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B1CB14238C68BA00B121E3 /* HistoryEx.swift */; };
 		56B1CB16238C68BA00B121E3 /* HistoryEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B1CB14238C68BA00B121E3 /* HistoryEx.swift */; };
+		56C5FD4B2392F82E006F76BA /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C5FD4A2392F82E006F76BA /* ChartView.swift */; };
 		56D594B723897C6C00A69388 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D594B623897C6C00A69388 /* AppDelegate.swift */; };
 		56D594B923897C6C00A69388 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D594B823897C6C00A69388 /* SceneDelegate.swift */; };
 		56D594BB23897C6C00A69388 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D594BA23897C6C00A69388 /* ContentView.swift */; };
@@ -27,10 +28,12 @@
 		56D594D32389913800A69388 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56D594D22389913800A69388 /* NotificationCenter.framework */; };
 		56D594D62389913800A69388 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D594D52389913800A69388 /* TodayViewController.swift */; };
 		56D594D92389913800A69388 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56D594D72389913800A69388 /* MainInterface.storyboard */; };
-		56D594DD2389913800A69388 /* OperativeLeaseCalcToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 56D594D02389913800A69388 /* OperativeLeaseCalcToday.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		56D594DD2389913800A69388 /* Dnešní nájezd OL.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 56D594D02389913800A69388 /* Dnešní nájezd OL.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		56D594E8238A6F6400A69388 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56D594E7238A6F6400A69388 /* Localizable.strings */; };
 		56D594EA238AF76100A69388 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D594E9238AF76100A69388 /* NotificationManager.swift */; };
 		56D594EB238AF9B000A69388 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D594E9238AF76100A69388 /* NotificationManager.swift */; };
+		63116AF0C4ED2B423AD39086 /* Pods_OperativeLeaseCalc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D884E78FDD5600A70090E85 /* Pods_OperativeLeaseCalc.framework */; };
+		D9F08AA988BA21F1642E391E /* Pods_OperativeLeaseCalcToday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C281125442C7F611479BA247 /* Pods_OperativeLeaseCalcToday.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +73,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				56D594DD2389913800A69388 /* OperativeLeaseCalcToday.appex in Embed App Extensions */,
+				56D594DD2389913800A69388 /* Dnešní nájezd OL.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +81,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3D884E78FDD5600A70090E85 /* Pods_OperativeLeaseCalc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OperativeLeaseCalc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		56664179238DB9550038B435 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		5666417E23905BB70038B435 /* OBD2Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBD2Manager.swift; sourceTree = "<group>"; };
 		5697FE56238C486D00D487EE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -85,7 +89,8 @@
 		5697FE8B238C4EE700D487EE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		5697FE8D238C4FCF00D487EE /* LeaseParamsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaseParamsEx.swift; sourceTree = "<group>"; };
 		56B1CB14238C68BA00B121E3 /* HistoryEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEx.swift; sourceTree = "<group>"; };
-		56D594B323897C6C00A69388 /* OperativeLeaseCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OperativeLeaseCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		56C5FD4A2392F82E006F76BA /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		56D594B323897C6C00A69388 /* Nájezd OL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nájezd OL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56D594B623897C6C00A69388 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56D594B823897C6C00A69388 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		56D594BA23897C6C00A69388 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,7 +98,7 @@
 		56D594BF23897C6F00A69388 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		56D594C223897C6F00A69388 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56D594C423897C6F00A69388 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		56D594D02389913800A69388 /* OperativeLeaseCalcToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OperativeLeaseCalcToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		56D594D02389913800A69388 /* Dnešní nájezd OL.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Dnešní nájezd OL.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56D594D22389913800A69388 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		56D594D52389913800A69388 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		56D594D82389913800A69388 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -102,6 +107,11 @@
 		56D594E32389917000A69388 /* OperativeLeaseCalcToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OperativeLeaseCalcToday.entitlements; sourceTree = "<group>"; };
 		56D594E7238A6F6400A69388 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		56D594E9238AF76100A69388 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		960847CCA4CD60436ECC5B5F /* Pods-OperativeLeaseCalc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperativeLeaseCalc.release.xcconfig"; path = "Target Support Files/Pods-OperativeLeaseCalc/Pods-OperativeLeaseCalc.release.xcconfig"; sourceTree = "<group>"; };
+		C281125442C7F611479BA247 /* Pods_OperativeLeaseCalcToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OperativeLeaseCalcToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C679432BCE7206049F115F93 /* Pods-OperativeLeaseCalc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperativeLeaseCalc.debug.xcconfig"; path = "Target Support Files/Pods-OperativeLeaseCalc/Pods-OperativeLeaseCalc.debug.xcconfig"; sourceTree = "<group>"; };
+		DC7D6094C20F76208CC42C60 /* Pods-OperativeLeaseCalcToday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperativeLeaseCalcToday.release.xcconfig"; path = "Target Support Files/Pods-OperativeLeaseCalcToday/Pods-OperativeLeaseCalcToday.release.xcconfig"; sourceTree = "<group>"; };
+		E4A30B818B2EB455014C6A10 /* Pods-OperativeLeaseCalcToday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperativeLeaseCalcToday.debug.xcconfig"; path = "Target Support Files/Pods-OperativeLeaseCalcToday/Pods-OperativeLeaseCalcToday.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63116AF0C4ED2B423AD39086 /* Pods_OperativeLeaseCalc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56D594D32389913800A69388 /* NotificationCenter.framework in Frameworks */,
+				D9F08AA988BA21F1642E391E /* Pods_OperativeLeaseCalcToday.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,14 +169,15 @@
 				5697FE73238C4E4700D487EE /* CoreData */,
 				56D594D12389913800A69388 /* Frameworks */,
 				56D594B423897C6C00A69388 /* Products */,
+				D3C3576FFCBE49C55266831D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		56D594B423897C6C00A69388 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				56D594B323897C6C00A69388 /* OperativeLeaseCalc.app */,
-				56D594D02389913800A69388 /* OperativeLeaseCalcToday.appex */,
+				56D594B323897C6C00A69388 /* Nájezd OL.app */,
+				56D594D02389913800A69388 /* Dnešní nájezd OL.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,6 +213,8 @@
 			children = (
 				5697FE8B238C4EE700D487EE /* CoreData.framework */,
 				56D594D22389913800A69388 /* NotificationCenter.framework */,
+				3D884E78FDD5600A70090E85 /* Pods_OperativeLeaseCalc.framework */,
+				C281125442C7F611479BA247 /* Pods_OperativeLeaseCalcToday.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				56D594BA23897C6C00A69388 /* ContentView.swift */,
+				56C5FD4A2392F82E006F76BA /* ChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -233,6 +249,17 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		D3C3576FFCBE49C55266831D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C679432BCE7206049F115F93 /* Pods-OperativeLeaseCalc.debug.xcconfig */,
+				960847CCA4CD60436ECC5B5F /* Pods-OperativeLeaseCalc.release.xcconfig */,
+				E4A30B818B2EB455014C6A10 /* Pods-OperativeLeaseCalcToday.debug.xcconfig */,
+				DC7D6094C20F76208CC42C60 /* Pods-OperativeLeaseCalcToday.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -240,11 +267,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56D594C723897C6F00A69388 /* Build configuration list for PBXNativeTarget "OperativeLeaseCalc" */;
 			buildPhases = (
+				6F8BEC498F78A1EFC73885B7 /* [CP] Check Pods Manifest.lock */,
 				56D594AF23897C6C00A69388 /* Sources */,
 				56D594B023897C6C00A69388 /* Frameworks */,
 				56D594B123897C6C00A69388 /* Resources */,
 				56D594E12389913800A69388 /* Embed App Extensions */,
 				5697FE7A238C4E4700D487EE /* Embed Frameworks */,
+				BE547BEA9E2A2FB69D2ECCBC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -253,13 +282,14 @@
 			);
 			name = OperativeLeaseCalc;
 			productName = OperativeLeaseCalc;
-			productReference = 56D594B323897C6C00A69388 /* OperativeLeaseCalc.app */;
+			productReference = 56D594B323897C6C00A69388 /* Nájezd OL.app */;
 			productType = "com.apple.product-type.application";
 		};
 		56D594CF2389913800A69388 /* OperativeLeaseCalcToday */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56D594DE2389913800A69388 /* Build configuration list for PBXNativeTarget "OperativeLeaseCalcToday" */;
 			buildPhases = (
+				85A81D255456918E509CF392 /* [CP] Check Pods Manifest.lock */,
 				56D594CC2389913800A69388 /* Sources */,
 				56D594CD2389913800A69388 /* Frameworks */,
 				56D594CE2389913800A69388 /* Resources */,
@@ -271,7 +301,7 @@
 			);
 			name = OperativeLeaseCalcToday;
 			productName = OperativeLeaseCalcToday;
-			productReference = 56D594D02389913800A69388 /* OperativeLeaseCalcToday.appex */;
+			productReference = 56D594D02389913800A69388 /* Dnešní nájezd OL.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -333,12 +363,77 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6F8BEC498F78A1EFC73885B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OperativeLeaseCalc-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85A81D255456918E509CF392 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OperativeLeaseCalcToday-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE547BEA9E2A2FB69D2ECCBC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OperativeLeaseCalc/Pods-OperativeLeaseCalc-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OperativeLeaseCalc/Pods-OperativeLeaseCalc-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OperativeLeaseCalc/Pods-OperativeLeaseCalc-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		56D594AF23897C6C00A69388 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				56D594EA238AF76100A69388 /* NotificationManager.swift in Sources */,
+				56C5FD4B2392F82E006F76BA /* ChartView.swift in Sources */,
 				56B1CB15238C68BA00B121E3 /* HistoryEx.swift in Sources */,
 				5697FE8E238C4FCF00D487EE /* LeaseParamsEx.swift in Sources */,
 				56D594B723897C6C00A69388 /* AppDelegate.swift in Sources */,
@@ -511,6 +606,7 @@
 		};
 		56D594C823897C6F00A69388 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C679432BCE7206049F115F93 /* Pods-OperativeLeaseCalc.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -525,7 +621,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ljezny.OperativeLeaseCalc;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Nájezd OL";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -533,6 +629,7 @@
 		};
 		56D594C923897C6F00A69388 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 960847CCA4CD60436ECC5B5F /* Pods-OperativeLeaseCalc.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -547,7 +644,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ljezny.OperativeLeaseCalc;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Nájezd OL";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -555,6 +652,7 @@
 		};
 		56D594DF2389913800A69388 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4A30B818B2EB455014C6A10 /* Pods-OperativeLeaseCalcToday.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OperativeLeaseCalcToday/OperativeLeaseCalcToday.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -566,7 +664,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ljezny.OperativeLeaseCalc.OperativeLeaseCalcToday;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Dnešní nájezd OL";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -575,6 +673,7 @@
 		};
 		56D594E02389913800A69388 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC7D6094C20F76208CC42C60 /* Pods-OperativeLeaseCalcToday.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = OperativeLeaseCalcToday/OperativeLeaseCalcToday.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -586,7 +685,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ljezny.OperativeLeaseCalc.OperativeLeaseCalcToday;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Dnešní nájezd OL";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

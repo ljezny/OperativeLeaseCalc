@@ -13,7 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let obd2Manager = OBD2Manager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-      
+        /*
+        var sum = 0;
+        for i in 1...256 {
+            let calendar = Calendar.current
+            let d = calendar.date(byAdding: .day, value: -256+i, to: Date())!
+            sum += Int(arc4random() % 30)
+            AppModel.shared.addState(date: d, state: sum)
+        }
+        PersistentStorageManager.shared.saveContext()*/
         
         return true
     }

@@ -49,7 +49,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
         if characteristic == rxCharacteristics {
             if let data = characteristic.value, let dataString = String(data: data, encoding: .ascii) {
                 let parts = dataString.split(separator: " ")
-                if parts.count == 4 {
+                if parts.count > 3 {
                     if let hi = Int.init(parts[2], radix: 16),
                         let lo = Int.init(parts[3], radix: 16) {
                         let value = Int(hi << 8 + lo)
@@ -62,7 +62,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
     }
     
     private func requestDistance() {
-        if let c = txCharacteristics,let data = "01 31".data(using: .ascii) {
+        if let c = txCharacteristics,let data = "01 31\r".data(using: .ascii) {
             peripheral.writeValue(data, for: c, type: .withoutResponse)
         }
     }
