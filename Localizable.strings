@@ -25,3 +25,6 @@
 "tab.overview" = "Přehled";
 "tab.settings" = "Nastavení";
 "tab.history" = "Historie";
+
+"today.ideal.caption" = "Ideální nájezd";
+"today.actual.caption" = "Skutečný nájezd";

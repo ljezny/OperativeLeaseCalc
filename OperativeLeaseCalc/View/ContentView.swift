@@ -113,7 +113,7 @@ struct ContentView: View {
                             Toggle(isOn: $model.leaseParams.notifications) {
                                 Text("notifications.enable")
                             }
-                            TextField("obd.offset", value: $model.leaseParams.obdOffset, formatter: distanceFormatter).keyboardType(.decimalPad)
+                            TextField("obd.offset", value: $model.leaseParams.yearLimit, formatter: distanceFormatter).keyboardType(.decimalPad)
                             
                         }
                     }.navigationBarTitle(Text("tab.settings"))

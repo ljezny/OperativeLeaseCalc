@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5631EE7A23942B4400F23DA5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56D594E7238A6F6400A69388 /* Localizable.strings */; };
 		5666417A238DB9550038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
 		5666417B238DB9580038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
 		5666417F23905BB70038B435 /* OBD2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666417E23905BB70038B435 /* OBD2Manager.swift */; };
@@ -358,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56D594D92389913800A69388 /* MainInterface.storyboard in Resources */,
+				5631EE7A23942B4400F23DA5 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

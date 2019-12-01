@@ -10,12 +10,16 @@ import UIKit
 import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
+    @IBOutlet weak var idealCaption: UILabel!
     @IBOutlet weak var limitLabel: UILabel!
+    @IBOutlet weak var actualCaption: UILabel!
     @IBOutlet weak var actualLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        idealCaption.text = NSLocalizedString("today.ideal.caption", comment: "")
+        actualCaption.text = NSLocalizedString("today.actual.caption", comment: "")
+        
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
