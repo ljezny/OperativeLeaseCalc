@@ -37,6 +37,12 @@ struct ChartView: UIViewRepresentable {
         v.highlightPerTapEnabled = false
         v.xAxis.valueFormatter = ChartDateFormatter()
         v.gridBackgroundColor = v.gridBackgroundColor.withAlphaComponent(0.1)
+        v.xAxis.labelTextColor = NSUIColor.label
+        v.noDataTextColor = NSUIColor.label
+        v.leftAxis.labelTextColor = NSUIColor.label
+        v.rightAxis.labelTextColor = NSUIColor.label
+        v.noDataText = ""
+        v.legend.textColor = NSUIColor.label
         return v
     }
     
@@ -60,6 +66,7 @@ struct ChartView: UIViewRepresentable {
         realDataSet.mode = .horizontalBezier
         realDataSet.drawCirclesEnabled = false
         realDataSet.drawValuesEnabled = false
+        realDataSet.valueColors = [NSUIColor.red]
         
         let gradientColors = [UIColor.red.cgColor, UIColor.clear.cgColor] as CFArray // Colors of the gradient
         let colorLocations:[CGFloat] = [1.0, 0.0] // Positioning of the gradient
@@ -70,7 +77,7 @@ struct ChartView: UIViewRepresentable {
         lineChartData.addDataSet(realDataSet)
         
         let idealDataSet = LineChartDataSet(entries: idealEntries, label: NSLocalizedString("today.ideal.caption", comment: ""))
-        idealDataSet.colors = [NSUIColor.black]
+        idealDataSet.colors = [NSUIColor.label]
         idealDataSet.lineWidth = 2
         idealDataSet.cubicIntensity = 1
         idealDataSet.mode = .horizontalBezier

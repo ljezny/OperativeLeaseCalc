@@ -11,7 +11,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        #if DEBUG
         if AppModel.shared.history.count == 0 {
             var sum = 0;
             for i in 1...30 {
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             PersistentStorageManager.shared.saveContext()
         }
-        
+        #endif
         
         return true
     }
