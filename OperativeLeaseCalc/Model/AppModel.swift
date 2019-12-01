@@ -11,6 +11,13 @@ import UIKit
 class AppModel:NSObject, ObservableObject {
     static let shared = AppModel()
     
+    override init() {
+        super.init()
+        if obdEnabled {
+            let _ = OBD2Manager.shared
+        }
+    }
+    
     var leaseParams = PersistentStorageManager.shared.loadLeaseParams()
     @Published var history = PersistentStorageManager.shared.loadHistory()
     
@@ -22,6 +29,34 @@ class AppModel:NSObject, ObservableObject {
     
     var realStateFormatted: String {
         return "\(realState) km"
+    }
+    
+    var notifications: Bool {
+        get{
+            return leaseParams.notifications
+        }
+        set(v) {
+            leaseParams.notifications = v
+            if v {
+                NotificationManager.shared.requestPermission {[weak self] (b) in
+                    if !b {
+                        self?.notifications = false
+                    }
+                }
+            }
+        }
+    }
+    
+    var obdEnabled: Bool {
+        get{
+            return leaseParams.obdEnabled
+        }
+        set(v) {
+            leaseParams.obdEnabled = v
+            if v {
+                let _ = OBD2Manager.shared
+            }
+        }
     }
     
     func addState(date:Date, state: Int) {

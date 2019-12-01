@@ -28,3 +28,16 @@
 
 "today.ideal.caption" = "Ideální nájezd";
 "today.actual.caption" = "Skutečný nájezd";
+
+"obd.purchase.header" = "Koupit OBD2";
+"obd.purchase.footer" = "Aplikace umožňuje automatické čtení stavu nájezdu při otočení klíčku v zapalování. Podporovaná jsou pouze zařízení, která komunikují přes Bluetooth 4.0 (nikoliv pouze Bluetooth). Doporučuji zakoupit uvedené zařízení, které bylo v aplikaci plně otestováno.";
+"obd.purchase.action" = "Do obchodu s OBD II BT 4.0";
+
+"obd.enable.header" = "Povolit OBD2";
+"obd.enable.footer" = "Pokud OBD2 již máte, připojte jej do konektoru ve vozidle dle návodu, otočte klíčkem v zapalování a povolte čtení z OBD2. Aplikace automaticky zařízení nalezne a vyčte hodnotu stavu km.";
+"obd.enable.toggle" = "Povolit OBD2";
+
+"obd.offset.header" = "Kalibrace OBD2";
+"obd.offset.footer" = "Zřejmě z bezpečnostních důvodu neposkytuje OBD2 celkový stav kilometrů, ale pouze stav od posledního servisu vozidla - vymazání chybových kódů. Vyčtený stav tak bude vždy nižší než reálný. Do políčka Rozdíl dopište hodnotu, kterou má aplikace přičíst.";
+"obd.offset.real" = "Kalibrace OBD2";
+"obd.offset.offset" = "Povolit OBD2";

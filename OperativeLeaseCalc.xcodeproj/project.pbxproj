@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5631EE7A23942B4400F23DA5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56D594E7238A6F6400A69388 /* Localizable.strings */; };
+		5631EE7B239437A800F23DA5 /* OBD2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666417E23905BB70038B435 /* OBD2Manager.swift */; };
 		5666417A238DB9550038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
 		5666417B238DB9580038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
 		5666417F23905BB70038B435 /* OBD2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666417E23905BB70038B435 /* OBD2Manager.swift */; };
@@ -458,6 +459,7 @@
 				5697FE91238C53A200D487EE /* Model.xcdatamodeld in Sources */,
 				56B1CB16238C68BA00B121E3 /* HistoryEx.swift in Sources */,
 				56D594D62389913800A69388 /* TodayViewController.swift in Sources */,
+				5631EE7B239437A800F23DA5 /* OBD2Manager.swift in Sources */,
 				5697FE5A238C4BE800D487EE /* PersistentStorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

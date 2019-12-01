@@ -72,7 +72,9 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     private var manager: CBCentralManager? = nil
     private var obd2Device: OBD2Device?
     
-    override init() {
+    static let shared = OBD2Manager()
+    
+    private override init() {
         super.init()
         self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
     }
