@@ -13,7 +13,7 @@ struct ContentView: View {
     @State var isAdding: Bool = false
     @State private var realState: Int?
     
-    private var yearLimitFormatted: NumberFormatter {
+    private var distanceFormatter: NumberFormatter {
         let f = NumberFormatter()
         f.allowsFloats = false
         f.minimum = 0
@@ -25,7 +25,7 @@ struct ContentView: View {
     var addingRealStateModalView: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 24) {
-                TextField("realstate.placeholder", value: $realState, formatter: yearLimitFormatted, onEditingChanged: { (b) in
+                TextField("realstate.placeholder", value: $realState, formatter: distanceFormatter, onEditingChanged: { (b) in
                     
                 }) {
                     print("\(self.realState ?? 0)")
@@ -67,7 +67,7 @@ struct ContentView: View {
                             DatePicker(selection: $model.leaseParams.leaseStart, in: ...Date(), displayedComponents: .date) {
                                 Text("start.date")
                             }
-                            TextField("year.limit", value: $model.leaseParams.yearLimit, formatter: yearLimitFormatted).keyboardType(.decimalPad)
+                            TextField("year.limit", value: $model.leaseParams.yearLimit, formatter: distanceFormatter).keyboardType(.decimalPad)
                         }
                         
                     }.navigationBarTitle(Text("general.appname"))
@@ -108,6 +108,13 @@ struct ContentView: View {
                             Toggle(isOn: $model.leaseParams.notifications) {
                                 Text("notifications.enable")
                             }
+                        }
+                        Section(header: Text("obd.header").font(.subheadline), footer: Text("obd.footer").font(.footnote)) {
+                            Toggle(isOn: $model.leaseParams.notifications) {
+                                Text("notifications.enable")
+                            }
+                            TextField("obd.offset", value: $model.leaseParams.obdOffset, formatter: distanceFormatter).keyboardType(.decimalPad)
+                            
                         }
                     }.navigationBarTitle(Text("tab.settings"))
                 }.tabItem({

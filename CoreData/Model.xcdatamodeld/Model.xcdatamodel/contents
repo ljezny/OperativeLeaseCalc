@@ -6,11 +6,12 @@
     </entity>
     <entity name="LeaseParams" representedClassName="LeaseParams" syncable="YES" codeGenerationType="class">
         <attribute name="notifications" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="obdOffset" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
         <attribute name="startDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="yearLimit" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
     </entity>
     <elements>
         <element name="History" positionX="-54" positionY="9" width="128" height="73"/>
-        <element name="LeaseParams" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="LeaseParams" positionX="-63" positionY="-18" width="128" height="103"/>
     </elements>
 </model>
