@@ -56,7 +56,7 @@ struct ContentView: View {
                             Text("\(model.leaseParams.actualLimitFormatted)").font(.largeTitle)
                         }
                         Section(header: Text("realstate.header").font(.subheadline), footer: Text("realstate.footer").font(.footnote)) {
-                            Text("\(model.history.first?.state ?? 0) km").font(.largeTitle)
+                            Text(AppModel.shared.realStateFormatted).font(.largeTitle)
                             Button("realstate.add") {
                                 self.isAdding = true
                             }.sheet(isPresented: $isAdding, content: {

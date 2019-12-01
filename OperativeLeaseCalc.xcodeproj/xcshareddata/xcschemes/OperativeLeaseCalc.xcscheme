@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "56D594B223897C6C00A69388"
-               BuildableName = "OperativeLeaseCalc.app"
+               BuildableName = "Na&#x301;jezd OL.app"
                BlueprintName = "OperativeLeaseCalc"
                ReferencedContainer = "container:OperativeLeaseCalc.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56D594B223897C6C00A69388"
-            BuildableName = "OperativeLeaseCalc.app"
+            BuildableName = "Na&#x301;jezd OL.app"
             BlueprintName = "OperativeLeaseCalc"
             ReferencedContainer = "container:OperativeLeaseCalc.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56D594B223897C6C00A69388"
-            BuildableName = "OperativeLeaseCalc.app"
+            BuildableName = "Na&#x301;jezd OL.app"
             BlueprintName = "OperativeLeaseCalc"
             ReferencedContainer = "container:OperativeLeaseCalc.xcodeproj">
          </BuildableReference>

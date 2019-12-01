@@ -11,6 +11,7 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var limitLabel: UILabel!
+    @IBOutlet weak var actualLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         limitLabel.text = PersistentStorageManager.shared.loadLeaseParams().actualLimitFormatted
+        actualLabel.text = AppModel.shared.realStateFormatted
         completionHandler(NCUpdateResult.newData)
     }
     

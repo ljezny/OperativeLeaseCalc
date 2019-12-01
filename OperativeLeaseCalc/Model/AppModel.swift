@@ -16,6 +16,14 @@ class AppModel:NSObject, ObservableObject {
     
     var lastOBD2State: Int?
     
+    var realState: Int {
+        return (self.history.first?.state as? Int) ?? 0
+    }
+    
+    var realStateFormatted: String {
+        return "\(realState) km"
+    }
+    
     func addState(date:Date, state: Int) {
         self.history.insert(PersistentStorageManager.shared.addHistory(date: date, state: state), at: 0)
     }
