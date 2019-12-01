@@ -48,7 +48,7 @@ class PersistentStorageManager {
     
     func loadHistory() -> [History] {
         let request = NSFetchRequest<History>(entityName: "History")
-        request.sortDescriptors?.append(NSSortDescriptor.init(key: "date", ascending: false))
+        request.sortDescriptors = [NSSortDescriptor.init(key: "date", ascending: false)]
         return (try? persistentContainer.viewContext.fetch(request)) ?? [History]()
     }
     

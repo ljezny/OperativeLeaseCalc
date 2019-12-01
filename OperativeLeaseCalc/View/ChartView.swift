@@ -52,10 +52,12 @@ struct ChartView: UIViewRepresentable {
         var realColors = [NSUIColor]()
         var idealEntries = [ChartDataEntry]()
         
-        model.history.forEach { (h) in
-            realEntries.insert(ChartDataEntry.init(x: h.date!.timeIntervalSince1970, y: Double(h.state!)), at: 0)
-            idealEntries.insert(ChartDataEntry.init(x: h.date!.timeIntervalSince1970, y: Double(h.idealState(leaseParams: model.leaseParams) ?? 0)), at: 0)
-            realColors.insert(h.isOverlimit(leaseParams: model.leaseParams) ? NSUIColor.red : NSUIColor.green, at: 0)
+        model.history.sorted { (a, b) -> Bool in
+            a.date! < b.date!
+        }.forEach { (h) in
+            realEntries.append(ChartDataEntry.init(x: h.date!.timeIntervalSince1970, y: Double(h.state!)))
+            idealEntries.append(ChartDataEntry.init(x: h.date!.timeIntervalSince1970, y: Double(h.idealState(leaseParams: model.leaseParams) ?? 0)))
+            realColors.append(h.isOverlimit(leaseParams: model.leaseParams) ? NSUIColor.red : NSUIColor.green)
         }
         
         let realDataSet = LineChartDataSet(entries: realEntries, label: NSLocalizedString("today.actual.caption", comment: ""))
