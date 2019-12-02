@@ -88,7 +88,7 @@ struct ContentView: View {
                         }
                         Section(header: Text("obd.offset.header").font(.headline), footer: Text("obd.offset.footer").font(.footnote)) {
                             Text(model.lastOBD2StateFormatted)
-                            TextField("obd.offset", value: $model.leaseParams.obdOffset, formatter: distanceFormatter).keyboardType(.decimalPad)
+                            TextField("obd.offset", value: $model.leaseParams.obdOffset, formatter: distanceFormatter).keyboardType(.numbersAndPunctuation)
                         }
                     }.navigationBarTitle(Text("tab.settings"))
                 }.tabItem({
