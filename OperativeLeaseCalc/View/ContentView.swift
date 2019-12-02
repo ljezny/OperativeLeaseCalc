@@ -7,6 +7,15 @@
 //
 
 import SwiftUI
+import MessageUI
+import GZIP
+
+class Mail:NSObject, MFMailComposeViewControllerDelegate {
+    @objc(mailComposeController:didFinishWithResult:error:)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
 
 struct ContentView: View {
     @ObservedObject var model = AppModel.shared
@@ -67,7 +76,7 @@ struct ContentView: View {
                     Text("tab.history") })
                 ChartView(model: model).navigationBarTitle(Text("Third")).tabItem({
                     Image("tab_graph")
-                    Text("tab.history")
+                    Text("tab.graph")
                 })
                 NavigationView {
                     Form{
@@ -90,6 +99,11 @@ struct ContentView: View {
                             Text(model.lastOBD2StateFormatted)
                             TextField("obd.offset", value: $model.leaseParams.obdOffset, formatter: distanceFormatter).keyboardType(.numbersAndPunctuation)
                         }
+                        Section(header: Text("contact.header").font(.headline), footer: Text("contact.footer").font(.footnote)) {
+                            Button("contact.action") {
+                                self.contactAction()
+                            }
+                        }
                     }.navigationBarTitle(Text("tab.settings"))
                 }.tabItem({
                     Image("tab_settings")
@@ -99,6 +113,40 @@ struct ContentView: View {
         //}.navigationViewStyle(StackNavigationViewStyle())
     }
     
+    var mailComposerVC:MFMailComposeViewController?
+    
+    func getExportLogBody() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        
+        return "\(NSLocalizedString("profile.describe.problem", comment: ""))\n\n\n\nName: \(UIDevice.current.name), Version: \(UIDevice.current.systemVersion), Model: \(UIDevice.current.model), Time: \(dateFormatter.string(from: Date())), AppVersion:\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? ""),\(Bundle.main.infoDictionary!["CFBundleVersion"] ?? "")\n"
+    }
+    
+    func contactAction() {
+        if MFMailComposeViewController.canSendMail() {
+            let composeVC = MFMailComposeViewController()
+            composeVC.mailComposeDelegate = Mail()
+            
+            // Configure the fields of the interface.
+            composeVC.setToRecipients(["ljezny@gmail.com" ])
+            composeVC.setSubject(NSLocalizedString("general.appname", comment: ""))
+            composeVC.setMessageBody(getExportLogBody(), isHTML: false)
+            
+            let attachmentData = NSMutableData()
+            for logFileData in (UIApplication.shared.delegate as! AppDelegate).logFileDataArray {
+                attachmentData.append(logFileData as Data)
+            }
+            
+            if let data = attachmentData.gzippedData(withCompressionLevel: 1.0) {
+                composeVC.addAttachmentData(data, mimeType: "application/gzip ", fileName: "diagnostic.zip")
+            } else {
+                composeVC.addAttachmentData(attachmentData as Data, mimeType: "text/plain", fileName: "diagnostic.log")
+            }
+            
+            UIApplication.shared.windows.first?.rootViewController?.present(composeVC, animated: true, completion: nil)
+        }
+    }
     
 }
 

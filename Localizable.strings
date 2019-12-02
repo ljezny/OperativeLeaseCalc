@@ -25,6 +25,7 @@
 "tab.overview" = "Přehled";
 "tab.settings" = "Nastavení";
 "tab.history" = "Historie";
+"tab.graph" = "Graf";
 
 "today.ideal.caption" = "Ideální nájezd";
 "today.actual.caption" = "Skutečný nájezd";
@@ -41,3 +42,6 @@
 "obd.offset.footer" = "Zřejmě z bezpečnostních důvodu neposkytuje OBD2 celkový stav kilometrů, ale pouze stav od posledního servisu vozidla - vymazání chybových kódů. Vyčtený stav tak bude vždy nižší než reálný. Do políčka Rozdíl dopište hodnotu, kterou má aplikace přičíst.";
 "obd.offset" = "Rozdíl";
 
+"contact.header" = "Info";
+"contact.footer" = "Kontaktovat e-mailem";
+"contact.action" = "Pokud Vám v aplikaci něco chybí nebo přebývá, můžete mi o tom napsat e-mailem. K e-mailu bude automaticky přiložena příloha s výstupy aplikace, které mi usnadňují řešení případných problémů.";

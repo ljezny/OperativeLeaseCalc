@@ -10,21 +10,31 @@ PODS:
   - Charts (3.4.0):
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
+  - CocoaLumberjack/Core (3.6.0)
+  - CocoaLumberjack/Swift (3.6.0):
+    - CocoaLumberjack/Core
+  - GZIP (1.2.2)
 
 DEPENDENCIES:
   - AppCenter
   - Charts
+  - CocoaLumberjack/Swift
+  - GZIP (= 1.2.2)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Charts
   trunk:
     - AppCenter
+    - CocoaLumberjack
+    - GZIP
 
 SPEC CHECKSUMS:
   AppCenter: fddcbac6e4baae3d93a196ceb0bfe0e4ce407dec
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
+  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
+  GZIP: 12374d285e3b5d46cfcd480700fcfc7e16caf4f1
 
-PODFILE CHECKSUM: a6c21ffff8f1973b5862b63dcd8c0826c371fc5c
+PODFILE CHECKSUM: 6292895a15faad983a74302358a6c840cb67728a
 
 COCOAPODS: 1.8.4

@@ -10,10 +10,41 @@ import UIKit
 import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
+import CocoaLumberjack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var fileLoger: DDFileLogger?
+    
+    var logFileDataArray: [NSData] {
+        get {
+            let logFilePaths = fileLoger!.logFileManager.sortedLogFilePaths
+            var logFileDataArray = [NSData]()
+            for logFilePath in logFilePaths ?? [] {
+                let fileURL = NSURL(fileURLWithPath: logFilePath)
+                if let logFileData = try? NSData(contentsOf: fileURL as URL, options: NSData.ReadingOptions.mappedIfSafe) {
+                    // Insert at front to reverse the order, so that oldest logs appear first.
+                    logFileDataArray.insert(logFileData, at: 0)
+                }
+            }
+            return logFileDataArray
+        }
+    }
+
+    private func initLogger() -> DDFileLogger {
+        DDLog.add(DDTTYLogger.sharedInstance) // TTY = Xcode console
+         
+        let logger: DDFileLogger = DDFileLogger() // File Logger
+        logger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
+        logger.logFileManager.maximumNumberOfLogFiles = 3
+        DDLog.add(logger)
+        
+        return logger
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        self.fileLoger = self.initLogger()
+        
         #if DEBUG
         if AppModel.shared.history.count == 0 {
             var sum = 0;

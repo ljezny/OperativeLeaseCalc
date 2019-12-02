@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import CocoaLumberjack
 
 class AppModel:NSObject, ObservableObject {
     static let shared = AppModel()
@@ -75,11 +76,14 @@ class AppModel:NSObject, ObservableObject {
     }
     
     func addStateFromOBD2(state: Int) {
+        DDLogInfo("AppModel: addStateFromOBD2 state: \(state)" )
         lastOBD2State = state
         if obdEnabled {
             let totalState = state + Int(truncating: (leaseParams.obdOffset ?? 0))
             self.addState(state: totalState)
+            DDLogInfo("AppModel: addStateFromOBD2 obd enabled, saving to history" )
             if notifications {
+                DDLogInfo("AppModel: addStateFromOBD2 notification enabled, requesting notification")
                 NotificationManager.shared.notify(idealState: totalState, actualState: leaseParams.idealState ?? 0 )
             }
         }

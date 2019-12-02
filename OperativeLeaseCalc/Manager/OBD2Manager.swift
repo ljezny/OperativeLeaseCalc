@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import CocoaLumberjack
 
 class OBD2Device: NSObject, CBPeripheralDelegate {
     let peripheral: CBPeripheral
@@ -48,6 +49,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if characteristic == rxCharacteristics {
             if let data = characteristic.value, let dataString = String(data: data, encoding: .ascii) {
+                DDLogInfo("OBD2Device: didUpdateValueFor value: \(dataString)" )
                 let parts = dataString.split(separator: " ")
                 if parts.count > 3 {
                     if let hi = Int.init(parts[2], radix: 16),
@@ -62,6 +64,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
     }
     
     private func requestDistance() {
+        DDLogInfo("OBD2Device: requestDistance")
         if let c = txCharacteristics,let data = "01 31\r".data(using: .ascii) {
             peripheral.writeValue(data, for: c, type: .withoutResponse)
         }
@@ -80,8 +83,10 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        DDLogInfo("OBD2Manager: centralManagerDidUpdateState: \(central.state)")
         switch central.state {
         case .poweredOn:
+            DDLogInfo("OBD2Manager: centralManagerDidUpdateState: powered on")
             self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
         default:
             break
@@ -90,14 +95,17 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         obd2Device = OBD2Device(peripheral: peripheral)
+        DDLogInfo("OBD2Manager: didDiscover: \(peripheral)'")
         self.manager?.connect(peripheral, options: nil)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        DDLogInfo("OBD2Manager: didConnect: \(peripheral)'")
         peripheral.discoverServices([OBD2Device.SERVICE_UUID])
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        DDLogInfo("OBD2Manager: didDisconnectPeripheral: \(peripheral)'")
         obd2Device = nil
     }
 }
