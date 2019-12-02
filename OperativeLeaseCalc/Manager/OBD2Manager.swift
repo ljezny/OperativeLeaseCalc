@@ -82,12 +82,15 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
     }
     
+    func startScanning() {
+        DDLogInfo("OBD2Manager: startScanning")
+        self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
+    }
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         DDLogInfo("OBD2Manager: centralManagerDidUpdateState: \(central.state)")
         switch central.state {
         case .poweredOn:
-            DDLogInfo("OBD2Manager: centralManagerDidUpdateState: powered on")
-            self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
+            startScanning()
         default:
             break
         }
@@ -102,11 +105,13 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         DDLogInfo("OBD2Manager: didConnect: \(peripheral)'")
         peripheral.discoverServices([OBD2Device.SERVICE_UUID])
+        self.manager?.stopScan()
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         DDLogInfo("OBD2Manager: didDisconnectPeripheral: \(peripheral)'")
         obd2Device = nil
+        startScanning()
     }
 }
 
