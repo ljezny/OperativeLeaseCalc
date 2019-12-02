@@ -85,7 +85,7 @@ class AppModel:NSObject, ObservableObject {
             DDLogInfo("AppModel: addStateFromOBD2 obd enabled, saving to history" )
             if notifications {
                 DDLogInfo("AppModel: addStateFromOBD2 notification enabled, requesting notification")
-                NotificationManager.shared.notify(idealState: totalState, actualState: leaseParams.idealState ?? 0 )
+                NotificationManager.shared.notify(idealState: leaseParams.idealState ?? 0, actualState:  totalState)
             }
         }
     }

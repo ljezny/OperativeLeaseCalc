@@ -16,7 +16,7 @@
 "notifications.footer" = "Aplikace zobrazí notifikaci o kontrole nájezdu jednou za čas.";
 "notifications.enable" = "Povolit notifikace";
 "notification.title" = "Zkontrolujte nájezd";
-"notification.body" = "Aktuální stav je %@ a ideální by měl být %@.";
+"notification.body" = "Aktuální stav je %d km a ideální by měl být %d km.";
 "realstate.header" = "Skutečný stav km";
 "realstate.footer" = "Skutečný stav můžete zadávat průběžně ručně nebo nastavit automatické načítání pomocí OBD2 přes Bluetooth. Aplikace eviduje historii nájezdu.";
 "realstate.placeholder" = "Aktuální nájezd v km";

@@ -39,7 +39,6 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
             if c.uuid == OBD2Device.TX_CHAR_UUID {
                 txCharacteristics = c
                 setupCommands()
-                requestDistance()
             }
             if c.uuid == OBD2Device.RX_CHAR_UUID {
                 rxCharacteristics = c
@@ -51,15 +50,25 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
         if characteristic == rxCharacteristics {
             if let data = characteristic.value, let dataString = String(data: data, encoding: .ascii) {
                 DDLogInfo("OBD2Device: didUpdateValueFor value: \(dataString)" )
-                let parts = dataString.split(separator: " ")
-                if parts.count > 3 {
-                    if let hi = Int.init(parts[2], radix: 16),
-                        let lo = Int.init(parts[3], radix: 16) {
-                        let value = Int(hi << 8 + lo)
-                        
-                        AppModel.shared.addStateFromOBD2(state: value)
+                if dataString == "AT ST FF\rOK\r\r>" { //response to AT command
+                    requestDistance()
+                } else if dataString == "NO DATA\r\r>" {
+                    requestDistance()
+                } else if dataString.starts(with: "01 31\r"){
+                    let dataString = dataString.replacingOccurrences(of: "01 31\r", with: "")
+                    //41 31 02 00\r
+                    let parts = dataString.split(separator: " ")
+                    if parts.count > 3 {
+                        if parts[0] == "41", parts[1] == "31", let hi = Int.init(parts[2], radix: 16),
+                            let lo = Int.init(parts[3], radix: 16) {
+                            let value = Int(hi << 8 + lo)
+                            
+                            AppModel.shared.addStateFromOBD2(state: value)
+                        }
                     }
                 }
+                
+                
             }
         }
     }
@@ -88,7 +97,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     private override init() {
         super.init()
-        self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
+        self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main, options: [CBCentralManagerOptionRestoreIdentifierKey:"OBD2Manager"])
     }
     
     func startScanning() {
@@ -104,6 +113,8 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         switch central.state {
         case .poweredOn:
             startScanning()
+        case .poweredOff:
+            obd2Device = nil
         default:
             break
         }
@@ -124,6 +135,10 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         DDLogInfo("OBD2Manager: didDisconnectPeripheral: \(peripheral)'")
         obd2Device = nil
+        startScanning()
+    }
+    
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         startScanning()
     }
 }
