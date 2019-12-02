@@ -14,6 +14,8 @@ import CocoaLumberjack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    let appRater = AppReviewer()
+    
     var fileLoger: DDFileLogger?
     
     var logFileDataArray: [NSData] {
@@ -64,6 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           MSAnalytics.self,
           MSCrashes.self
         ])
+        
+        appRater.checkReview()
         
         return true
     }

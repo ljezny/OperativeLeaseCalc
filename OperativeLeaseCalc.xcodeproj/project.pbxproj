@@ -14,6 +14,7 @@
 		5666417A238DB9550038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
 		5666417B238DB9580038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
 		5666417F23905BB70038B435 /* OBD2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666417E23905BB70038B435 /* OBD2Manager.swift */; };
+		566E6E9823955895008B487E /* AppReviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E6E9723955895008B487E /* AppReviewer.swift */; };
 		5697FE59238C490500D487EE /* PersistentStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697FE58238C490500D487EE /* PersistentStorageManager.swift */; };
 		5697FE5A238C4BE800D487EE /* PersistentStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697FE58238C490500D487EE /* PersistentStorageManager.swift */; };
 		5697FE8E238C4FCF00D487EE /* LeaseParamsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697FE8D238C4FCF00D487EE /* LeaseParamsEx.swift */; };
@@ -89,6 +90,7 @@
 		5631EE7C2394543E00F23DA5 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		56664179238DB9550038B435 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		5666417E23905BB70038B435 /* OBD2Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBD2Manager.swift; sourceTree = "<group>"; };
+		566E6E9723955895008B487E /* AppReviewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppReviewer.swift; path = ../../../MasterThermEasyControl/MasterThermEasyControl/MasterThermEasyControl/Utils/AppReviewer.swift; sourceTree = "<group>"; };
 		5697FE56238C486D00D487EE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5697FE58238C490500D487EE /* PersistentStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorageManager.swift; sourceTree = "<group>"; };
 		5697FE8B238C4EE700D487EE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
@@ -148,6 +150,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		566E6E9623955884008B487E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				566E6E9723955895008B487E /* AppReviewer.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		56849359238B10F600608760 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +201,7 @@
 		56D594B523897C6C00A69388 /* OperativeLeaseCalc */ = {
 			isa = PBXGroup;
 			children = (
+				566E6E9623955884008B487E /* Utils */,
 				56664178238DB9400038B435 /* Model */,
 				56849359238B10F600608760 /* Extensions */,
 				56D594EE238AFBCF00A69388 /* Manager */,
@@ -441,6 +452,7 @@
 			files = (
 				56D594EA238AF76100A69388 /* NotificationManager.swift in Sources */,
 				56C5FD4B2392F82E006F76BA /* ChartView.swift in Sources */,
+				566E6E9823955895008B487E /* AppReviewer.swift in Sources */,
 				56B1CB15238C68BA00B121E3 /* HistoryEx.swift in Sources */,
 				5697FE8E238C4FCF00D487EE /* LeaseParamsEx.swift in Sources */,
 				56D594B723897C6C00A69388 /* AppDelegate.swift in Sources */,
