@@ -5,6 +5,7 @@ target 'OperativeLeaseCalc' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod 'Charts'
+  pod 'AppCenter'
   # Pods for OperativeLeaseCalc
 
 end
@@ -12,7 +13,7 @@ end
 target 'OperativeLeaseCalcToday' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
+  pod 'AppCenter'
   # Pods for OperativeLeaseCalcToday
 
 end

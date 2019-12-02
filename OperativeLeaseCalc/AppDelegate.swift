@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PersistentStorageManager.shared.saveContext()
         }
         #endif
+        
+        
+        MSAppCenter.start("6bf308eb-2b84-40bd-b6b0-432d1032595d", withServices:[
+          MSAnalytics.self,
+          MSCrashes.self
+        ])
         
         return true
     }

@@ -1,18 +1,30 @@
 PODS:
+  - AppCenter (2.5.1):
+    - AppCenter/Analytics (= 2.5.1)
+    - AppCenter/Crashes (= 2.5.1)
+  - AppCenter/Analytics (2.5.1):
+    - AppCenter/Core
+  - AppCenter/Core (2.5.1)
+  - AppCenter/Crashes (2.5.1):
+    - AppCenter/Core
   - Charts (3.4.0):
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
 
 DEPENDENCIES:
+  - AppCenter
   - Charts
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Charts
+  trunk:
+    - AppCenter
 
 SPEC CHECKSUMS:
+  AppCenter: fddcbac6e4baae3d93a196ceb0bfe0e4ce407dec
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
 
-PODFILE CHECKSUM: 503538ca773360ce2572b5ece04d73c02d9fcf75
+PODFILE CHECKSUM: a6c21ffff8f1973b5862b63dcd8c0826c371fc5c
 
 COCOAPODS: 1.8.4
