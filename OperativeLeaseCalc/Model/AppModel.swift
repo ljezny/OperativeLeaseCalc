@@ -70,6 +70,7 @@ class AppModel:NSObject, ObservableObject {
     
     func addState(date:Date, state: Int) {
         self.history.insert(PersistentStorageManager.shared.addHistory(date: date, state: state), at: 0)
+        PersistentStorageManager.shared.saveContext()
     }
     func addState(state: Int) {
         addState(date: Date(), state: state)
