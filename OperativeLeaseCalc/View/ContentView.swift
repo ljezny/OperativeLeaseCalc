@@ -10,7 +10,9 @@ import SwiftUI
 import MessageUI
 import GZIP
 
-class Mail:NSObject, MFMailComposeViewControllerDelegate {
+class MailSharedDelegate: NSObject, MFMailComposeViewControllerDelegate {
+    static let shared = MailSharedDelegate()
+    
     @objc(mailComposeController:didFinishWithResult:error:)
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
@@ -120,13 +122,13 @@ struct ContentView: View {
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
         
-        return "\(NSLocalizedString("profile.describe.problem", comment: ""))\n\n\n\nName: \(UIDevice.current.name), Version: \(UIDevice.current.systemVersion), Model: \(UIDevice.current.model), Time: \(dateFormatter.string(from: Date())), AppVersion:\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? ""),\(Bundle.main.infoDictionary!["CFBundleVersion"] ?? "")\n"
+        return "\n\n\n\nName: \(UIDevice.current.name), Version: \(UIDevice.current.systemVersion), Model: \(UIDevice.current.model), Time: \(dateFormatter.string(from: Date())), AppVersion:\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] ?? ""),\(Bundle.main.infoDictionary!["CFBundleVersion"] ?? "")\n"
     }
     
     func contactAction() {
         if MFMailComposeViewController.canSendMail() {
             let composeVC = MFMailComposeViewController()
-            composeVC.mailComposeDelegate = Mail()
+            composeVC.mailComposeDelegate = MailSharedDelegate.shared
             
             // Configure the fields of the interface.
             composeVC.setToRecipients(["ljezny@gmail.com" ])
