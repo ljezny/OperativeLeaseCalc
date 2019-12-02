@@ -38,6 +38,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
         service.characteristics?.forEach({ (c) in
             if c.uuid == OBD2Device.TX_CHAR_UUID {
                 txCharacteristics = c
+                setupCommands()
                 requestDistance()
             }
             if c.uuid == OBD2Device.RX_CHAR_UUID {
@@ -62,10 +63,18 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
             }
         }
     }
+    private func setupCommands() {
+        DDLogInfo("OBD2Device: setupCommands")
+        sendCommand(command: "AT ST FF")
+    }
     
     private func requestDistance() {
         DDLogInfo("OBD2Device: requestDistance")
-        if let c = txCharacteristics,let data = "01 31\r".data(using: .ascii) {
+        sendCommand(command: "01 31")
+    }
+    
+    private func sendCommand(command:String) {
+        if let c = txCharacteristics,let data = "\(command)\r".data(using: .ascii) {
             peripheral.writeValue(data, for: c, type: .withoutResponse)
         }
     }
@@ -84,6 +93,10 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     func startScanning() {
         DDLogInfo("OBD2Manager: startScanning")
+        self.manager?.retrieveConnectedPeripherals(withServices: [OBD2Device.SERVICE_UUID]).forEach({ (p) in
+            obd2Device = OBD2Device(peripheral: p)
+            p.discoverServices([OBD2Device.SERVICE_UUID])
+        })
         self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
     }
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
