@@ -51,6 +51,7 @@ class AppModel:NSObject, ObservableObject {
                     if !b {
                         self?.notifications = false
                     }
+                    PersistentStorageManager.shared.saveContext()
                 }
             }
         }
@@ -65,6 +66,7 @@ class AppModel:NSObject, ObservableObject {
             if v {
                 let _ = OBD2Manager.shared
             }
+            PersistentStorageManager.shared.saveContext()
         }
     }
     
