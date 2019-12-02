@@ -97,7 +97,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     private override init() {
         super.init()
-        self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main, options: [CBCentralManagerOptionRestoreIdentifierKey:"OBD2Manager"])
+        self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
     }
     
     func startScanning() {
@@ -138,8 +138,5 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         startScanning()
     }
     
-    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        startScanning()
-    }
 }
 

@@ -50,13 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         if AppModel.shared.history.count == 0 {
             var sum = 0;
-            for i in 1...30 {
+            let days = 40
+            for i in 1...days {
                 let calendar = Calendar.current
-                let d = calendar.date(byAdding: .day, value: 30+i, to: Date())!
-                sum += Int(arc4random() % 30)
+                let d = calendar.date(byAdding: .day, value: -days+i, to: Date())!
+                sum += Int(sqrt(Double(arc4random() % 60*60)))
                 AppModel.shared.addState(date: d, state: sum)
             }
-            
+            AppModel.shared.leaseParams.leaseStart = Calendar.current.date(byAdding: .day, value: -days, to: Date())!
+            AppModel.shared.leaseParams.yearLimit = 10000
             PersistentStorageManager.shared.saveContext()
         }
         #endif

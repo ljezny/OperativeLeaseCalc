@@ -59,7 +59,7 @@ struct ContentView: View {
                 }.tabItem({
                     Image("tab_note")
                     Text("tab.overview")
-                })
+                }).navigationViewStyle(StackNavigationViewStyle())
                 NavigationView {
                     Form{
                         List(AppModel.shared.history) { h in
@@ -75,7 +75,7 @@ struct ContentView: View {
                     }.navigationBarTitle(Text("tab.history"))
                 }.tabItem({
                     Image("tab_history")
-                    Text("tab.history") })
+                    Text("tab.history") }).navigationViewStyle(StackNavigationViewStyle())
                 ChartView(model: model).navigationBarTitle(Text("Third")).tabItem({
                     Image("tab_graph")
                     Text("tab.graph")
@@ -110,7 +110,7 @@ struct ContentView: View {
                 }.tabItem({
                     Image("tab_settings")
                     Text("tab.settings")
-                })
+                    }).navigationViewStyle(StackNavigationViewStyle())
         }.accentColor(Color.red)
         //}.navigationViewStyle(StackNavigationViewStyle())
     }

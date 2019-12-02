@@ -17,6 +17,7 @@ class ChartDateFormatter: IAxisValueFormatter {
         let df = DateFormatter()
         df.timeStyle = .none
         df.dateStyle = .short
+        df.dateFormat = "dd.MM"
         return df.string(from: Date.init(timeIntervalSince1970: value))
     }
 }
@@ -82,7 +83,7 @@ struct ChartView: UIViewRepresentable {
         idealDataSet.colors = [NSUIColor.label]
         idealDataSet.lineWidth = 2
         idealDataSet.cubicIntensity = 1
-        idealDataSet.mode = .horizontalBezier
+        idealDataSet.mode = .linear
         idealDataSet.drawCirclesEnabled = false
         idealDataSet.drawValuesEnabled = false
         lineChartData.addDataSet(idealDataSet)
