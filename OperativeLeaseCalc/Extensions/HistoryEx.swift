@@ -15,7 +15,7 @@ extension History: Identifiable {
     
     public var dateFormatter: DateFormatter {
         let df = DateFormatter()
-        df.timeStyle = .none
+        df.timeStyle = .medium
         df.dateStyle = .medium
         return df
     }

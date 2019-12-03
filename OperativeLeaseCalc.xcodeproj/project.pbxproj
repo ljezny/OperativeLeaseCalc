@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5631EE7A23942B4400F23DA5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56D594E7238A6F6400A69388 /* Localizable.strings */; };
-		5631EE7B239437A800F23DA5 /* OBD2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666417E23905BB70038B435 /* OBD2Manager.swift */; };
 		5631EE7D2394543E00F23DA5 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5631EE7C2394543E00F23DA5 /* Color.swift */; };
 		5631EE7E2394543E00F23DA5 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5631EE7C2394543E00F23DA5 /* Color.swift */; };
+		5631EE802396E78A00F23DA5 /* OBD2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5631EE7F2396E78A00F23DA5 /* OBD2Manager.swift */; };
 		5666417A238DB9550038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
 		5666417B238DB9580038B435 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664179238DB9550038B435 /* AppModel.swift */; };
 		5666417F23905BB70038B435 /* OBD2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666417E23905BB70038B435 /* OBD2Manager.swift */; };
@@ -88,6 +88,7 @@
 /* Begin PBXFileReference section */
 		3D884E78FDD5600A70090E85 /* Pods_OperativeLeaseCalc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OperativeLeaseCalc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5631EE7C2394543E00F23DA5 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		5631EE7F2396E78A00F23DA5 /* OBD2Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBD2Manager.swift; sourceTree = "<group>"; };
 		56664179238DB9550038B435 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		5666417E23905BB70038B435 /* OBD2Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBD2Manager.swift; sourceTree = "<group>"; };
 		566E6E99239564CD008B487E /* AppReviewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReviewer.swift; sourceTree = "<group>"; };
@@ -243,6 +244,7 @@
 				56D594D52389913800A69388 /* TodayViewController.swift */,
 				56D594D72389913800A69388 /* MainInterface.storyboard */,
 				56D594DA2389913800A69388 /* Info.plist */,
+				5631EE7F2396E78A00F23DA5 /* OBD2Manager.swift */,
 			);
 			path = OperativeLeaseCalcToday;
 			sourceTree = "<group>";
@@ -470,13 +472,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5631EE802396E78A00F23DA5 /* OBD2Manager.swift in Sources */,
 				5666417B238DB9580038B435 /* AppModel.swift in Sources */,
 				56D594EB238AF9B000A69388 /* NotificationManager.swift in Sources */,
 				5697FE8F238C4FCF00D487EE /* LeaseParamsEx.swift in Sources */,
 				5697FE91238C53A200D487EE /* Model.xcdatamodeld in Sources */,
 				56B1CB16238C68BA00B121E3 /* HistoryEx.swift in Sources */,
 				56D594D62389913800A69388 /* TodayViewController.swift in Sources */,
-				5631EE7B239437A800F23DA5 /* OBD2Manager.swift in Sources */,
 				5697FE5A238C4BE800D487EE /* PersistentStorageManager.swift in Sources */,
 				5631EE7E2394543E00F23DA5 /* Color.swift in Sources */,
 			);

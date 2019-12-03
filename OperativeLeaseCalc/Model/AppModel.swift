@@ -80,10 +80,12 @@ class AppModel:NSObject, ObservableObject {
     
     func addStateFromOBD2(state: Int) {
         DDLogInfo("AppModel: addStateFromOBD2 state: \(state)" )
+        
         if lastOBD2State == state {
             return
         }
         lastOBD2State = state
+        
         if obdEnabled {
             let totalState = state + Int(truncating: (leaseParams.obdOffset ?? 0))
             self.addState(state: totalState)

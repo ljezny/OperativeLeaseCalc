@@ -55,9 +55,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
         if characteristic == rxCharacteristics {
             if let data = characteristic.value, let dataString = String(data: data, encoding: .ascii) {
                 DDLogInfo("OBD2Device: didUpdateValueFor value: \(dataString)" )
-                if dataString == "AT MA\r" {
-                    return //no futher processing, wait for some monitoring data receive
-                } else if dataString.starts(with: "01 31\r"){
+                if dataString.starts(with: "01 31\r"){ //response to distance request
                     let dataString = dataString.replacingOccurrences(of: "01 31\r", with: "")
                     //41 31 02 00\r
                     let parts = dataString.split(separator: " ")
@@ -112,7 +110,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     private override init() {
         super.init()
-        self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
+        self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main,options:[CBCentralManagerOptionRestoreIdentifierKey:"OBD2Manager"])
     }
     
     func startScanning() {
@@ -153,5 +151,8 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         startScanning()
     }
     
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
+        startScanning()
+    }
 }
 
