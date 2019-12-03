@@ -39,6 +39,8 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
             if c.uuid == OBD2Device.TX_CHAR_UUID {
                 txCharacteristics = c
                 setupCommands()
+                requestDistance()
+                sendNextCommand()
             }
             if c.uuid == OBD2Device.RX_CHAR_UUID {
                 rxCharacteristics = c
@@ -46,14 +48,15 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
             }
         })
     }
+    
+    var pendingCommands = [String]()
+    
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if characteristic == rxCharacteristics {
             if let data = characteristic.value, let dataString = String(data: data, encoding: .ascii) {
                 DDLogInfo("OBD2Device: didUpdateValueFor value: \(dataString)" )
-                if dataString == "AT ST FF\rOK\r\r>" { //response to AT command
-                    requestDistance()
-                } else if dataString == "NO DATA\r\r>" {
-                    requestDistance()
+                if dataString == "AT MA\r" {
+                    return //no futher processing, wait for some monitoring data receive
                 } else if dataString.starts(with: "01 31\r"){
                     let dataString = dataString.replacingOccurrences(of: "01 31\r", with: "")
                     //41 31 02 00\r
@@ -68,22 +71,34 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
                     }
                 }
                 
+                if pendingCommands.isEmpty {
+                    requestDistance()
+                }
                 
+                sendNextCommand()
             }
         }
     }
+    
     private func setupCommands() {
-        DDLogInfo("OBD2Device: setupCommands")
-        sendCommand(command: "AT ST FF")
+        pendingCommands.append("ATZ") //reset
+        pendingCommands.append("ATD") //set defaults
+        pendingCommands.append("AT ST FF") //set maximum timeout
+    }
+    
+    private func sendNextCommand() {
+        if pendingCommands.count > 0 {
+            sendCommand(command: pendingCommands.removeFirst())
+        }
     }
     
     private func requestDistance() {
-        DDLogInfo("OBD2Device: requestDistance")
-        sendCommand(command: "01 31")
+        pendingCommands.append("01 31")
     }
     
     private func sendCommand(command:String) {
         if let c = txCharacteristics,let data = "\(command)\r".data(using: .ascii) {
+            DDLogInfo("OBD2Device sendCommand: \(command)")
             peripheral.writeValue(data, for: c, type: .withoutResponse)
         }
     }
