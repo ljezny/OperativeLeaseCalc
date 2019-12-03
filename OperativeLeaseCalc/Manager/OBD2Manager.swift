@@ -146,7 +146,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         peripheral.discoverServices([OBD2Device.SERVICE_UUID])
         self.manager?.stopScan()
         
-        NotificationManager.shared.notify(title: "Connected \(peripheral.name)", body: "Shown only in Testflight builds")
+        NotificationManager.shared.notify(title: "Connected \(peripheral.name ?? "")", body: "Shown only in Testflight builds")
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -155,8 +155,10 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         startScanning()
         
         if isTestFlight {
-            NotificationManager.shared.notify(title: "Disconnected \(peripheral.name)", body: "Shown only in Testflight builds")
+            NotificationManager.shared.notify(title: "Disconnected \(peripheral.name ?? "")", body: "Shown only in Testflight builds")
         }
+        
+        AppModel.shared.onOBDDisconnected()
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {

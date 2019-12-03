@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         if AppModel.shared.history.count == 0 {
             var sum = 0;
-            let days = 40
+            let days = 300
             for i in 1...days {
                 let calendar = Calendar.current
                 let d = calendar.date(byAdding: .day, value: -days+i, to: Date())!

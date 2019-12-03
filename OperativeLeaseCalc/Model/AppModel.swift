@@ -79,21 +79,20 @@ class AppModel:NSObject, ObservableObject {
     }
     
     func addStateFromOBD2(state: Int) {
-        DDLogInfo("AppModel: addStateFromOBD2 state: \(state)" )
-        
         if lastOBD2State == state {
             return
         }
         lastOBD2State = state
-        
+        DDLogInfo("AppModel: addStateFromOBD2 state changed to: \(state)" )
         if obdEnabled {
             let totalState = state + Int(truncating: (leaseParams.obdOffset ?? 0))
             self.addState(state: totalState)
-            DDLogInfo("AppModel: addStateFromOBD2 obd enabled, saving to history" )
-            if notifications {
-                DDLogInfo("AppModel: addStateFromOBD2 notification enabled, requesting notification")
-                NotificationManager.shared.notify(idealState: leaseParams.idealState ?? 0, actualState:  totalState)
-            }
+        }
+    }
+    
+    func onOBDDisconnected() {
+        if notifications {
+            NotificationManager.shared.notify(idealState: leaseParams.idealState ?? 0, actualState: realState)
         }
     }
 }
