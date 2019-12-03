@@ -46,6 +46,8 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
             }
         })
     }
+    
+    //new String[] {"ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0"};
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if characteristic == rxCharacteristics {
             if let data = characteristic.value, let dataString = String(data: data, encoding: .ascii) {
@@ -64,6 +66,8 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
                             let value = Int(hi << 8 + lo)
                             
                             AppModel.shared.addStateFromOBD2(state: value)
+                            
+                            requestDistance()
                         }
                     }
                 }
@@ -121,8 +125,12 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        obd2Device = OBD2Device(peripheral: peripheral)
         DDLogInfo("OBD2Manager: didDiscover: \(peripheral)'")
+        if obd2Device != nil {
+            DDLogInfo("OBD2Manager: didDiscover already pending connection'")
+            return
+        }
+        obd2Device = OBD2Device(peripheral: peripheral)
         self.manager?.connect(peripheral, options: nil)
     }
     
