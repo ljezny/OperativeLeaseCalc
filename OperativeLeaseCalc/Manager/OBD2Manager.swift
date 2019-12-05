@@ -102,6 +102,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
     }
 }
 
+//http://www.splinter.com.au/2019/05/18/ios-swift-bluetooth-le/
 class OBD2Manager: NSObject, CBCentralManagerDelegate {
     private var manager: CBCentralManager? = nil
     private var obd2Device: OBD2Device?
@@ -112,17 +113,21 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     private override init() {
         super.init()
-        self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
+        self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main,options:[CBCentralManagerOptionRestoreIdentifierKey:"OBD2Manager"])
     }
     
     func startScanning() {
         DDLogInfo("OBD2Manager: startScanning")
-        self.manager?.retrieveConnectedPeripherals(withServices: [OBD2Device.SERVICE_UUID]).forEach({ (p) in
-            obd2Device = OBD2Device(peripheral: p)
-            p.discoverServices([OBD2Device.SERVICE_UUID])
-        })
-        self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
+        if let peripheral = self.manager?.retrieveConnectedPeripherals(withServices: [OBD2Device.SERVICE_UUID]).first {
+            DDLogInfo("OBD2Manager: startScanning, retrieved peripheral: \(peripheral)")
+            obd2Device = OBD2Device(peripheral: peripheral)
+            self.manager?.connect(peripheral, options: nil)
+        } else {
+            DDLogInfo("OBD2Manager: startScanning scanForPeripherals")
+            self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
+        }
     }
+    
     func stopScanning() {
         DDLogInfo("OBD2Manager: stopScanning")
         self.manager?.stopScan()
@@ -163,15 +168,26 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         DDLogInfo("OBD2Manager: didDisconnectPeripheral: \(peripheral)'")
-        obd2Device = nil
-        startScanning()
         
-        if isTestFlight {
-            NotificationManager.shared.notify(title: "Disconnected \(peripheral.name ?? "")", body: "Shown only in Testflight builds")
+        if let error = error {
+            DDLogInfo("OBD2Manager: didDisconnectPeripheral error, will re-connect: \(error)'")
+            self.manager?.connect(peripheral, options: nil)
+            
+            if isTestFlight {
+                NotificationManager.shared.notify(title: "Disconnected \(peripheral.name ?? "")", body: "Shown only in Testflight builds")
+            }
+            
+            AppModel.shared.onOBDDisconnected()
+        } else {
+            obd2Device = nil
+            startScanning()
         }
-        
-        AppModel.shared.onOBDDisconnected()
     }
     
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
+        DDLogInfo("OBD2Manager: willRestoreState: \(dict)'")
+        //startScanning()
+    }
+
 }
 
