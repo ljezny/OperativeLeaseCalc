@@ -448,7 +448,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
             endingLineNumber = "43"
-            landmarkName = "notifications"
+            landmarkName = "isOverlimit"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
@@ -464,8 +464,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "AppModel"
-            landmarkType = "3">
+            landmarkName = "realState"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

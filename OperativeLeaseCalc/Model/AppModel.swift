@@ -72,6 +72,11 @@ class AppModel:NSObject, ObservableObject {
         }
     }
     
+    func refresh() {
+        leaseParams = PersistentStorageManager.shared.loadLeaseParams()
+        history = PersistentStorageManager.shared.loadHistory()
+    }
+    
     func addState(date:Date, state: Int) {
         self.history.insert(PersistentStorageManager.shared.addHistory(date: date, state: state), at: 0)
         PersistentStorageManager.shared.saveContext()

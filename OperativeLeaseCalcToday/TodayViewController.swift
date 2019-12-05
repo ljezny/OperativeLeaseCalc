@@ -29,6 +29,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+        AppModel.shared.refresh()
         limitLabel.text = AppModel.shared.leaseParams.idealStateFormatted
         actualLabel.text = AppModel.shared.realStateFormatted
         actualLabel.textColor = AppModel.shared.isOverlimit ? UIColor.red : nil
