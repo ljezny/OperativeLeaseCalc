@@ -10,18 +10,26 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>cs</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Aplikace potřebuje přístup k Bluetooth kvůli čtení ujeté vzdálenosti přes OBD2.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Aplikace potřebuje přístup k Bluetooth kvůli čtení ujeté vzdálenosti přes OBD2.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -62,13 +70,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Aplikace potřebuje přístup k Bluetooth kvůli čtení ujeté vzdálenosti přes OBD2.</string>
-	<key>CFBundleLocalizations</key>
-	<array>
-		<string>cs</string>
-	</array>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Aplikace potřebuje přístup k Bluetooth kvůli čtení ujeté vzdálenosti přes OBD2.</string>
 </dict>
 </plist>

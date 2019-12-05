@@ -136,6 +136,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        self.manager?.stopScan()
         obd2Device = OBD2Device(peripheral: peripheral)
         DDLogInfo("OBD2Manager: didDiscover: \(peripheral)'")
         self.manager?.connect(peripheral, options: nil)
@@ -144,7 +145,6 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         DDLogInfo("OBD2Manager: didConnect: \(peripheral)'")
         peripheral.discoverServices([OBD2Device.SERVICE_UUID])
-        self.manager?.stopScan()
         
         NotificationManager.shared.notify(title: "Connected \(peripheral.name ?? "")", body: "Shown only in Testflight builds")
     }
