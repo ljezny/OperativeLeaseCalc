@@ -109,8 +109,6 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     static let shared = OBD2Manager()
     
-    private let isTestFlight = Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-    
     private override init() {
         super.init()
         self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main,options:[CBCentralManagerOptionRestoreIdentifierKey:"OBD2Manager"])
@@ -159,10 +157,6 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         DDLogInfo("OBD2Manager: didConnect: \(peripheral)'")
         peripheral.discoverServices([OBD2Device.SERVICE_UUID])
-        
-        if isTestFlight {
-            NotificationManager.shared.notify(title: "Connected \(peripheral.name ?? "")", body: "Shown only in Testflight builds")
-        }
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -176,10 +170,6 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         if let error = error {
             DDLogInfo("OBD2Manager: didDisconnectPeripheral error, will re-connect: \(error)'")
             self.manager?.connect(peripheral, options: nil)
-            
-            if isTestFlight {
-                NotificationManager.shared.notify(title: "Disconnected \(peripheral.name ?? "")", body: "Shown only in Testflight builds")
-            }
             
             AppModel.shared.onOBDDisconnected()
         } else {
