@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ])
         
         appRater.checkReview()
-        
+        DDLogInfo("AppDelegate: didFinishLaunchingWithOptions")
         return true
     }
 
@@ -89,10 +89,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func applicationWillResignActive(_ application: UIApplication) {
         PersistentStorageManager.shared.saveContext()
+        DDLogInfo("AppDelegate: applicationWillResignActive")
     }
     func applicationWillTerminate(_ application: UIApplication) {
         PersistentStorageManager.shared.saveContext()
+        DDLogInfo("AppDelegate: applicationWillTerminate")
     }
-
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        DDLogInfo("AppDelegate: applicationDidBecomeActive")
+    }
 }
 

@@ -146,7 +146,9 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         DDLogInfo("OBD2Manager: didConnect: \(peripheral)'")
         peripheral.discoverServices([OBD2Device.SERVICE_UUID])
         
-        NotificationManager.shared.notify(title: "Connected \(peripheral.name ?? "")", body: "Shown only in Testflight builds")
+        if isTestFlight {
+            NotificationManager.shared.notify(title: "Connected \(peripheral.name ?? "")", body: "Shown only in Testflight builds")
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
