@@ -66,7 +66,7 @@ struct ChartView: UIViewRepresentable {
         realDataSet.lineWidth = 2
         realDataSet.colors = [NSUIColor.red]
         realDataSet.cubicIntensity = 1
-        realDataSet.mode = .horizontalBezier
+        realDataSet.mode = .cubicBezier
         realDataSet.drawCirclesEnabled = false
         realDataSet.drawValuesEnabled = false
         realDataSet.valueColors = [NSUIColor.red]
@@ -83,7 +83,7 @@ struct ChartView: UIViewRepresentable {
         idealDataSet.colors = [NSUIColor.label]
         idealDataSet.lineWidth = 2
         idealDataSet.cubicIntensity = 1
-        idealDataSet.mode = .linear
+        idealDataSet.mode = .cubicBezier
         idealDataSet.drawCirclesEnabled = false
         idealDataSet.drawValuesEnabled = false
         lineChartData.addDataSet(idealDataSet)
