@@ -146,6 +146,10 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        if peripheral.name != "OBDII" {
+            DDLogInfo("OBD2Manager: didDiscover unknown peripheral, will be ignored: \(peripheral)'")
+            return
+        }
         obd2Device = OBD2Device(peripheral: peripheral)
         DDLogInfo("OBD2Manager: didDiscover: \(peripheral)'")
         stopScanning()
@@ -186,7 +190,6 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         DDLogInfo("OBD2Manager: willRestoreState: \(dict)'")
-        //startScanning()
     }
 
 }
