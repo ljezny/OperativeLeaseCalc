@@ -132,11 +132,18 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        DDLogInfo("OBD2Manager: centralManagerDidUpdateState: \(central.state)")
         switch central.state {
         case .poweredOn:
-            startScanning()
+            DDLogInfo("OBD2Manager: centralManagerDidUpdateState: poweredOn")
+            if let peripheral = obd2Device?.peripheral {
+                DDLogInfo("OBD2Manager: centralManagerDidUpdateState: reconnecting restored device")
+                self.manager?.connect(peripheral, options: nil)
+            } else {
+                DDLogInfo("OBD2Manager: centralManagerDidUpdateState: scanning started")
+                startScanning()
+            }
         case .poweredOff:
+            DDLogInfo("OBD2Manager: centralManagerDidUpdateState: poweredOff")
             obd2Device = nil
         default:
             break
@@ -161,7 +168,13 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         DDLogInfo("OBD2Manager: didFailToConnect: \(peripheral)'")
-        startScanning()
+        
+        if let peripheral = obd2Device?.peripheral {
+            DDLogInfo("OBD2Manager: didFailToConnect: reconnecting failed device")
+            self.manager?.connect(peripheral, options: nil)
+        } else {
+            startScanning()
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -180,6 +193,9 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         DDLogInfo("OBD2Manager: willRestoreState: \(dict)'")
+        if let peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral], let peripheral = peripherals.first {
+            obd2Device = OBD2Device(peripheral: peripheral)
+        }
     }
 
 }
