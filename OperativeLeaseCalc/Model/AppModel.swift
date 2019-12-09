@@ -66,7 +66,9 @@ class AppModel:NSObject, ObservableObject {
         set(v) {
             leaseParams.obdEnabled = v
             if v {
-                let _ = OBD2Manager.shared
+                let _ = OBD2Manager.shared.startScanning()
+            } else {
+                OBD2Manager.shared.forget()
             }
             PersistentStorageManager.shared.saveContext()
         }

@@ -131,6 +131,15 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         self.manager?.stopScan()
     }
     
+    func forget() {
+        DDLogInfo("OBD2Manager: forget")
+        stopScanning()
+        
+        if let peripheral = obd2Device?.peripheral {
+           self.manager?.cancelPeripheralConnection(peripheral)
+        }
+    }
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
@@ -187,7 +196,6 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
             AppModel.shared.onOBDDisconnected()
         } else {
             obd2Device = nil
-            startScanning()
         }
     }
     

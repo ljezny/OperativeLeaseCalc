@@ -644,7 +644,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ljezny.OperativeLeaseCalc;
 				PRODUCT_NAME = "Nájezd OL";
 				SWIFT_VERSION = 5.0;
@@ -668,7 +668,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ljezny.OperativeLeaseCalc;
 				PRODUCT_NAME = "Nájezd OL";
 				SWIFT_VERSION = 5.0;
@@ -689,7 +689,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ljezny.OperativeLeaseCalc.OperativeLeaseCalcToday;
 				PRODUCT_NAME = "Dnešní nájezd OL";
 				SKIP_INSTALL = YES;
@@ -711,7 +711,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ljezny.OperativeLeaseCalc.OperativeLeaseCalcToday;
 				PRODUCT_NAME = "Dnešní nájezd OL";
 				SKIP_INSTALL = YES;
