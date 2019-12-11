@@ -97,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func applicationDidBecomeActive(_ application: UIApplication) {
         DDLogInfo("AppDelegate: applicationDidBecomeActive")
+        AppModel.shared.refresh()
     }
 }
 
