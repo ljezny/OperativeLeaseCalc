@@ -161,7 +161,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if peripheral.name != "OBDII" {
-            DDLogInfo("OBD2Manager: didDiscover unknown peripheral, will be ignored: \(peripheral)'")
+            DDLogInfo("OBD2Manager: didDiscover unknown peripheral, will be ignored: \(peripheral)")
             return
         }
         obd2Device = OBD2Device(peripheral: peripheral)
@@ -176,7 +176,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        DDLogInfo("OBD2Manager: didFailToConnect: \(peripheral)'")
+        DDLogInfo("OBD2Manager: didFailToConnect: \(peripheral) error:\(String(describing: error))")
         
         if let peripheral = obd2Device?.peripheral {
             DDLogInfo("OBD2Manager: didFailToConnect: reconnecting failed device")
@@ -190,7 +190,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         DDLogInfo("OBD2Manager: didDisconnectPeripheral: \(peripheral)'")
         
         if let error = error {
-            DDLogInfo("OBD2Manager: didDisconnectPeripheral error, will re-connect: \(error)'")
+            DDLogInfo("OBD2Manager: didDisconnectPeripheral error, will re-connect: \(error)")
             self.manager?.connect(peripheral, options: nil)
             
             AppModel.shared.onOBDDisconnected()
