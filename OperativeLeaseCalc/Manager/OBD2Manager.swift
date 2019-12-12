@@ -178,6 +178,11 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         DDLogInfo("OBD2Manager: didFailToConnect: \(peripheral) error:\(String(describing: error))")
         
+        if let error = error {
+            DDLogInfo("OBD2Manager: didFailToConnect due to error:\(error)")
+            obd2Device = nil
+        }
+        
         if let peripheral = obd2Device?.peripheral {
             DDLogInfo("OBD2Manager: didFailToConnect: reconnecting failed device")
             self.manager?.connect(peripheral, options: nil)
