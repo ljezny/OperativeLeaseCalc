@@ -14,6 +14,11 @@ class LocationManager:NSObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     private let manager = CLLocationManager()
     
+    override init() {
+        super.init()
+        manager.delegate = self
+    }
+    
     func start() {
         DDLogInfo("LocationManager: start")
         manager.startMonitoringSignificantLocationChanges()
