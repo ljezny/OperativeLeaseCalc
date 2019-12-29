@@ -68,11 +68,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
                         }
                     }
                 }
-                
-                if pendingCommands.isEmpty {
-                    requestDistance()
-                }
-                
+               
                 sendNextCommand()
             }
         }
@@ -90,8 +86,11 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
         }
     }
     
-    private func requestDistance() {
+    public func requestDistance() {
         pendingCommands.append("01 31")
+        if pendingCommands.count == 1 {//distance command is one and only, then send it directly
+            sendNextCommand()
+        }
     }
     
     private func sendCommand(command:String) {
@@ -105,7 +104,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
 //http://www.splinter.com.au/2019/05/18/ios-swift-bluetooth-le/
 class OBD2Manager: NSObject, CBCentralManagerDelegate {
     private var manager: CBCentralManager? = nil
-    private var obd2Device: OBD2Device?
+    public var obd2Device: OBD2Device?
     
     static let shared = OBD2Manager()
     
@@ -173,6 +172,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         DDLogInfo("OBD2Manager: didConnect: \(peripheral)'")
         peripheral.discoverServices([OBD2Device.SERVICE_UUID])
+        LocationManager.shared.start()
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -202,6 +202,8 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         } else {
             obd2Device = nil
         }
+        
+        LocationManager.shared.stop()
     }
     
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
