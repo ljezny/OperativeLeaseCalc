@@ -44,6 +44,8 @@ struct ChartView: UIViewRepresentable {
         v.rightAxis.labelTextColor = NSUIColor.label
         v.noDataText = ""
         v.legend.textColor = NSUIColor.label
+        v.xAxis.granularityEnabled = true
+        v.xAxis.granularity = 60*60*24
         return v
     }
     
