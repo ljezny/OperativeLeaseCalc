@@ -10,6 +10,10 @@ import Foundation
 
 class OBD2Manager {
     static let shared = OBD2Manager()
+    
+    func requestDistance() {
+    }
+    
     func startScanning() {
     }
     func forget() {

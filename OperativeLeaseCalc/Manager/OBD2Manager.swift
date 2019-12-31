@@ -213,5 +213,8 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         }
     }
 
+    func requestDistance() {
+        obd2Device?.requestDistance()
+    }
 }
 

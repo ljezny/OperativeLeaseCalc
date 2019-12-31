@@ -35,7 +35,7 @@ class LocationManager:NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         DDLogInfo("LocationManager: didUpdateLocations: \(locations)")
-        OBD2Manager.shared.obd2Device?.requestDistance()
+        OBD2Manager.shared.requestDistance()
     }
     
     func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
