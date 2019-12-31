@@ -55,6 +55,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
         if characteristic == rxCharacteristics {
             if let data = characteristic.value, let dataString = String(data: data, encoding: .ascii) {
                 DDLogInfo("OBD2Device: didUpdateValueFor value: \(dataString)" )
+                var hasData = false
                 if dataString.starts(with: "01 31\r"){ //response to distance request
                     let dataString = dataString.replacingOccurrences(of: "01 31\r", with: "")
                     //41 31 02 00\r
@@ -65,8 +66,13 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
                             let value = Int(hi << 8 + lo)
                             
                             AppModel.shared.addStateFromOBD2(state: value)
+                            hasData = true
                         }
                     }
+                }
+                
+                if pendingCommands.isEmpty, !hasData {
+                    requestDistance()
                 }
                
                 sendNextCommand()
