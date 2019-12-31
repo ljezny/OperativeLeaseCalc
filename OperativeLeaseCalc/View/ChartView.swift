@@ -44,8 +44,6 @@ struct ChartView: UIViewRepresentable {
         v.rightAxis.labelTextColor = NSUIColor.label
         v.noDataText = ""
         v.legend.textColor = NSUIColor.label
-        v.xAxis.granularityEnabled = true
-        v.xAxis.granularity = 60*60*24
         return v
     }
     
@@ -55,12 +53,20 @@ struct ChartView: UIViewRepresentable {
         var realColors = [NSUIColor]()
         var idealEntries = [ChartDataEntry]()
         
+        var lastHistory: History? = nil
         model.history.sorted { (a, b) -> Bool in
             a.date! < b.date!
         }.forEach { (h) in
-            realEntries.append(ChartDataEntry.init(x: h.date!.timeIntervalSince1970, y: Double(h.state!)))
-            idealEntries.append(ChartDataEntry.init(x: h.date!.timeIntervalSince1970, y: Double(h.idealState(leaseParams: model.leaseParams) ?? 0)))
-            realColors.append(h.isOverlimit(leaseParams: model.leaseParams) ? NSUIColor.red : NSUIColor.green)
+            if lastHistory == nil {
+                lastHistory = h
+            } else {
+                if Calendar.current.startOfDay(for: h.date!) != Calendar.current.startOfDay(for: lastHistory!.date!) {
+                    realEntries.append(ChartDataEntry.init(x: lastHistory!.date!.timeIntervalSince1970, y: Double(lastHistory!.state!)))
+                    idealEntries.append(ChartDataEntry.init(x: lastHistory!.date!.timeIntervalSince1970, y: Double(h.idealState(leaseParams: model.leaseParams) ?? 0)))
+                    realColors.append(h.isOverlimit(leaseParams: model.leaseParams) ? NSUIColor.red : NSUIColor.green)
+                }
+                lastHistory = h
+            }
         }
         
         let realDataSet = LineChartDataSet(entries: realEntries, label: NSLocalizedString("today.actual.caption", comment: ""))
