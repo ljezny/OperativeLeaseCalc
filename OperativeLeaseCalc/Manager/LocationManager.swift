@@ -29,6 +29,10 @@ class LocationManager:NSObject, CLLocationManagerDelegate {
         manager.stopMonitoringSignificantLocationChanges()
     }
     
+    func requestAuthorization() {
+        manager.requestAlwaysAuthorization()
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         DDLogInfo("LocationManager: didUpdateLocations: \(locations)")
         OBD2Manager.shared.obd2Device?.requestDistance()

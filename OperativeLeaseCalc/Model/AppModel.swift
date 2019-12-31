@@ -67,6 +67,7 @@ class AppModel:NSObject, ObservableObject {
             leaseParams.obdEnabled = v
             if v {
                 OBD2Manager.shared.startScanning()
+                LocationManager.shared.requestAuthorization()
             } else {
                 OBD2Manager.shared.forget()
             }
