@@ -57,15 +57,11 @@ struct ChartView: UIViewRepresentable {
         model.history.sorted { (a, b) -> Bool in
             a.date! < b.date!
         }.forEach { (h) in
-            if lastHistory == nil {
+            if lastHistory == nil || Calendar.current.startOfDay(for: h.date!) != Calendar.current.startOfDay(for: lastHistory!.date!) {
                 lastHistory = h
-            } else {
-                if Calendar.current.startOfDay(for: h.date!) != Calendar.current.startOfDay(for: lastHistory!.date!) {
-                    realEntries.append(ChartDataEntry.init(x: lastHistory!.date!.timeIntervalSince1970, y: Double(lastHistory!.state!)))
-                    idealEntries.append(ChartDataEntry.init(x: lastHistory!.date!.timeIntervalSince1970, y: Double(h.idealState(leaseParams: model.leaseParams) ?? 0)))
-                    realColors.append(h.isOverlimit(leaseParams: model.leaseParams) ? NSUIColor.red : NSUIColor.green)
-                }
-                lastHistory = h
+                realEntries.append(ChartDataEntry.init(x: h.date!.timeIntervalSince1970, y: Double(h.state!)))
+                idealEntries.append(ChartDataEntry.init(x: h.date!.timeIntervalSince1970, y: Double(h.idealState(leaseParams: model.leaseParams) ?? 0)))
+                realColors.append(h.isOverlimit(leaseParams: model.leaseParams) ? NSUIColor.red : NSUIColor.green)
             }
         }
         
