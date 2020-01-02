@@ -17,16 +17,24 @@ class NotificationManager {
         }
     }
     
-    func notify(idealState: Int, actualState: Int) {
-        notify(title: NSLocalizedString("notification.title", comment: ""), body: String.init(format: NSLocalizedString("notification.body", comment: ""), actualState,idealState))
+    func notifyState(idealState: Int, actualState: Int) {
+        notify(title: NSLocalizedString("notification.title", comment: ""), body: String.init(format: NSLocalizedString("notification.state.body", comment: ""), actualState,idealState), id: "State")
     }
     
-    func notify(title: String, body: String) {
+    func notifyConnection() {
+        notify(title: NSLocalizedString("notification.title", comment: ""), body:  NSLocalizedString("notification.connect.body", comment: ""), id: "ConnectionState")
+    }
+    
+    func notifyDisconnection() {
+        notify(title: NSLocalizedString("notification.title", comment: ""), body:  NSLocalizedString("notification.disconnet.body", comment: ""), id: "ConnectionState")
+    }
+    
+    func notify(title: String, body: String, id: String) {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
         content.sound = UNNotificationSound.default
-        UNUserNotificationCenter.current().add(UNNotificationRequest.init(identifier: "OperativeLease", content:content, trigger: nil)) { (error) in
+        UNUserNotificationCenter.current().add(UNNotificationRequest.init(identifier: id, content:content, trigger: nil)) { (error) in
             
         }
     }

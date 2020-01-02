@@ -55,9 +55,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
         if characteristic == rxCharacteristics {
             if let data = characteristic.value, let dataString = String(data: data, encoding: .ascii) {
                 DDLogInfo("OBD2Device: didUpdateValueFor value: \(dataString)" )
-                var hasData = false
-                if dataString.starts(with: "01 31\r"){ //response to distance request
-                    let dataString = dataString.replacingOccurrences(of: "01 31\r", with: "")
+                if dataString.starts(with: "41 31") { //response to distance request
                     //41 31 02 00\r
                     let parts = dataString.split(separator: " ")
                     if parts.count > 3 {
@@ -66,7 +64,6 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
                             let value = Int(hi << 8 + lo)
                             
                             AppModel.shared.addStateFromOBD2(state: value)
-                            hasData = true
                         }
                     }
                 }
@@ -78,6 +75,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
     private func setupCommands() {
         pendingCommands.append("ATZ") //reset
         pendingCommands.append("ATD") //set defaults
+        pendingCommands.append("ATE0") //echo off
         pendingCommands.append("AT ST FF") //set maximum timeout
     }
     
@@ -174,6 +172,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         DDLogInfo("OBD2Manager: didConnect: \(peripheral)'")
         peripheral.discoverServices([OBD2Device.SERVICE_UUID])
         LocationManager.shared.start()
+        NotificationManager.shared.notifyConnection()
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -199,7 +198,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
             DDLogInfo("OBD2Manager: didDisconnectPeripheral error, will re-connect: \(error)")
             self.manager?.connect(peripheral, options: nil)
             
-            AppModel.shared.onOBDDisconnected()
+            NotificationManager.shared.notifyDisconnection()
         } else {
             obd2Device = nil
         }

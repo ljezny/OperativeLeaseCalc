@@ -24,8 +24,6 @@ class AppModel:NSObject, ObservableObject {
     @Published var history = PersistentStorageManager.shared.loadHistory()
     @Published var lastOBD2State: Int?
     
-    private var shoudNotifyOnDisconnect = false
-    
     var lastOBD2StateFormatted: String {
         return lastOBD2State == nil ? "-- km" : "\(lastOBD2State!) km"
     }
@@ -93,19 +91,13 @@ class AppModel:NSObject, ObservableObject {
             return
         }
         lastOBD2State = state
-        shoudNotifyOnDisconnect = true
         DDLogInfo("AppModel: addStateFromOBD2 state changed to: \(state)" )
         if obdEnabled {
             let totalState = state + Int(truncating: (leaseParams.obdOffset ?? 0))
             self.addState(state: totalState)
-        }
-    }
-    
-    func onOBDDisconnected() {
-        if notifications {
-            if shoudNotifyOnDisconnect {
-                shoudNotifyOnDisconnect = false
-                NotificationManager.shared.notify(idealState: leaseParams.idealState ?? 0, actualState: realState)
+            
+            if notifications {
+                NotificationManager.shared.notifyState(idealState: leaseParams.idealState ?? 0, actualState: realState)
             }
         }
     }
