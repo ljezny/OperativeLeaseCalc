@@ -70,11 +70,6 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
                         }
                     }
                 }
-                
-                if pendingCommands.isEmpty, !hasData {
-                    requestDistance()
-                }
-               
                 sendNextCommand()
             }
         }
