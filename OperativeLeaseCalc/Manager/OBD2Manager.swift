@@ -143,8 +143,11 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         case .poweredOn:
             DDLogInfo("OBD2Manager: centralManagerDidUpdateState: poweredOn")
             if let peripheral = obd2Device?.peripheral {
-                DDLogInfo("OBD2Manager: centralManagerDidUpdateState: reconnecting restored device")
-                self.manager?.connect(peripheral, options: nil)
+                DDLogInfo("OBD2Manager: centralManagerDidUpdateState: reconnecting restored device: \(peripheral)")
+                if peripheral.state == .disconnected {
+                    self.manager?.connect(peripheral, options: nil)
+                    DDLogInfo("OBD2Manager: centralManagerDidUpdateState: periphral is disconnected, reconnecting")
+                }
             } else {
                 DDLogInfo("OBD2Manager: centralManagerDidUpdateState: scanning started")
                 startScanning()
