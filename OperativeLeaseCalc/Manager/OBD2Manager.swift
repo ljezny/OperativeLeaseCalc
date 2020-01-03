@@ -17,9 +17,6 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
     static let TX_CHAR_UUID = CBUUID.init(string: "0xFFF2")
     static let RX_CHAR_UUID = CBUUID.init(string: "0xFFF1")
     
-    var txCharacteristics: CBCharacteristic?
-    var rxCharacteristics: CBCharacteristic?
-    
     init(peripheral: CBPeripheral) {
         self.peripheral = peripheral
         super.init()
@@ -37,13 +34,11 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         service.characteristics?.forEach({ (c) in
             if c.uuid == OBD2Device.TX_CHAR_UUID {
-                txCharacteristics = c
                 setupCommands()
                 requestDistance()
                 sendNextCommand()
             }
             if c.uuid == OBD2Device.RX_CHAR_UUID {
-                rxCharacteristics = c
                 self.peripheral.setNotifyValue(true, for: c)
             }
         })
@@ -52,7 +47,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
     var pendingCommands = [String]()
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        if characteristic == rxCharacteristics {
+        if characteristic.uuid == OBD2Device.RX_CHAR_UUID {
             if let data = characteristic.value, let dataString = String(data: data, encoding: .ascii) {
                 DDLogInfo("OBD2Device: didUpdateValueFor value: \(dataString)" )
                 if dataString.starts(with: "41 31") { //response to distance request
@@ -93,7 +88,11 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
     }
     
     private func sendCommand(command:String) {
-        if let c = txCharacteristics,let data = "\(command)\r".data(using: .ascii) {
+        if let c = peripheral.services?.flatMap({ s -> [CBCharacteristic] in
+            s.characteristics ?? [CBCharacteristic]()
+        }).first(where: { (c) -> Bool in
+            c.uuid == OBD2Device.TX_CHAR_UUID
+        }),let data = "\(command)\r".data(using: .ascii) {
             DDLogInfo("OBD2Device sendCommand: \(command)")
             peripheral.writeValue(data, for: c, type: .withoutResponse)
         }
