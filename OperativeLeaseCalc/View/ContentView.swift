@@ -98,6 +98,7 @@ struct ContentView: View {
                             }
                         }
                         Section(header: Text("obd.offset.header").font(.headline), footer: Text("obd.offset.footer").font(.footnote)) {
+                            //Text("\(OBD2Manager.shared.obd2Device?.peripheral.name ?? "")")
                             Text(model.lastOBD2StateFormatted)
                             TextField("obd.offset", value: $model.leaseParams.obdOffset, formatter: distanceFormatter).keyboardType(.numbersAndPunctuation)
                         }

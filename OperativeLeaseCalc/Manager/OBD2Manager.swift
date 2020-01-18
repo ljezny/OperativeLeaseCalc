@@ -63,6 +63,12 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
                     }
                 }
                 sendNextCommand()
+                
+                if pendingCommands.isEmpty {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {[weak self] in
+                        self?.requestDistance()
+                    }
+                }
             }
         }
     }
@@ -113,11 +119,18 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     func startScanning() {
         DDLogInfo("OBD2Manager: startScanning")
-        if let peripheral = self.manager?.retrieveConnectedPeripherals(withServices: [OBD2Device.SERVICE_UUID]).first {
+        
+        self.manager?.retrieveConnectedPeripherals(withServices: [OBD2Device.SERVICE_UUID]).forEach({ (peripheral) in
             DDLogInfo("OBD2Manager: startScanning, retrieved peripheral: \(peripheral)")
+            if peripheral.name != "OBDII" {
+                DDLogInfo("OBD2Manager: retrieved unknown peripheral, will be ignored: \(peripheral)")
+                return
+            }
             obd2Device = OBD2Device(peripheral: peripheral)
             self.manager?.connect(peripheral, options: nil)
-        } else {
+        })
+        
+        if obd2Device == nil {
             DDLogInfo("OBD2Manager: startScanning scanForPeripherals")
             self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
         }
