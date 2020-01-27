@@ -112,6 +112,8 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
     
     static let shared = OBD2Manager()
     
+    private static let LAST_CONNECTED_KEY = "last_connected_obd2"
+    
     private override init() {
         super.init()
         self.manager = CBCentralManager(delegate: self, queue: DispatchQueue.main,options:[CBCentralManagerOptionRestoreIdentifierKey:"OBD2Manager"])
@@ -126,13 +128,21 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
                 DDLogInfo("OBD2Manager: retrieved unknown peripheral, will be ignored: \(peripheral)")
                 return
             }
+            DDLogInfo("OBD2Manager: retrieved connected peripheral: \(peripheral)")
             obd2Device = OBD2Device(peripheral: peripheral)
             self.manager?.connect(peripheral, options: nil)
         })
         
         if obd2Device == nil {
-            DDLogInfo("OBD2Manager: startScanning scanForPeripherals")
-            self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
+            if let lastUsed = UserDefaults.standard.string(forKey: OBD2Manager.LAST_CONNECTED_KEY),let uuid = UUID.init(uuidString: lastUsed), let p = self.manager?.retrievePeripherals(withIdentifiers: [uuid]).first {
+                DDLogInfo("OBD2Manager: retrieved last connected peripheral: \(p)")
+                obd2Device = OBD2Device(peripheral: p)
+                self.manager?.connect(p, options: nil)
+            }
+            if obd2Device == nil {
+                DDLogInfo("OBD2Manager: startScanning scanForPeripherals")
+                self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
+            }
         }
     }
     
@@ -188,6 +198,8 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         peripheral.discoverServices([OBD2Device.SERVICE_UUID])
         LocationManager.shared.start()
         NotificationManager.shared.notifyConnection()
+        
+        UserDefaults.standard.set(peripheral.identifier.uuidString, forKey: OBD2Manager.LAST_CONNECTED_KEY)
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
