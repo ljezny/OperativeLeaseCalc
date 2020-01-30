@@ -65,7 +65,7 @@ class OBD2Device: NSObject, CBPeripheralDelegate {
                 sendNextCommand()
                 
                 if pendingCommands.isEmpty {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {[weak self] in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5 * 60.0) {[weak self] in
                         self?.requestDistance()
                     }
                 }
