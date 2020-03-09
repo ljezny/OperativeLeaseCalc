@@ -208,6 +208,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
         if let error = error {
             DDLogInfo("OBD2Manager: didFailToConnect due to error:\(error)")
             obd2Device = nil
+            UserDefaults.standard.removeObject(forKey: OBD2Manager.LAST_CONNECTED_KEY)
         }
         
         if let peripheral = obd2Device?.peripheral {
