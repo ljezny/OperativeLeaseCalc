@@ -141,7 +141,7 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
             }
             if obd2Device == nil {
                 DDLogInfo("OBD2Manager: startScanning scanForPeripherals")
-                self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options: nil)
+                self.manager?.scanForPeripherals(withServices: [OBD2Device.SERVICE_UUID], options:[CBCentralManagerScanOptionAllowDuplicatesKey:true])
             }
         }
     }
@@ -187,10 +187,14 @@ class OBD2Manager: NSObject, CBCentralManagerDelegate {
             DDLogInfo("OBD2Manager: didDiscover unknown peripheral, will be ignored: \(peripheral)")
             return
         }
-        obd2Device = OBD2Device(peripheral: peripheral)
-        DDLogInfo("OBD2Manager: didDiscover: \(peripheral)'")
-        stopScanning()
-        self.manager?.connect(peripheral, options: nil)
+        if obd2Device == nil {
+            obd2Device = OBD2Device(peripheral: peripheral)
+            DDLogInfo("OBD2Manager: didDiscover: \(peripheral)'")
+            stopScanning()
+            self.manager?.connect(peripheral, options: nil)
+        } else {
+            DDLogInfo("OBD2Manager: didDiscover duplicate peripheral.")
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
